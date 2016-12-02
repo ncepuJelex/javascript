@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟jquery底层链式编程</title>
+	<script type="text/javascript" charset="utf-8" src="../commons/myjquery.js"></script>
+</head>
+<body>
+	<input id="inp" type="button" value="点击我" />
+
+
+	<script type="text/javascript">
+		
+		$.onReady(function() {
+			// alert('1121');
+
+			var inp = $("#inp");
+			// alert(inp.dom.nodeName);
+
+			$("#inp").addEvent('click',function() {
+				alert('你竟敢点击我！');
+			}).setStyle('backgroundColor','skyblue');
+		});
+	</script>
+
+</body>
+</html>

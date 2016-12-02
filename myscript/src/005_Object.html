@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		// var obj = new Object();
+		var obj = {};
+
+		obj.name = 'zs';
+		obj.age = 20;
+		obj.sex = 'M';
+
+		obj.say = function() {
+			alert('dmnt');
+		}
+
+		console.log(obj);
+
+		console.log(obj.name);
+		// obj.say();
+
+		// delete:删除对象的属性和方法
+		// delete obj.sex;
+		// delete obj.say;
+
+		// console.log(obj);
+
+		obj['birthday'] = '1992-05-21';
+		//遍历 对象：for in
+		for(var attr in obj) {
+			console.log(attr + "=" + obj[attr]);
+		}
+
+		//constructor
+		console.log(obj.constructor);
+
+		var arr = [];
+		console.log(arr.constructor);
+
+		console.log(obj.hasOwnProperty('name'));//true
+
+		// console.log(obj.isPrototypeOf(''));
+
+		console.log(obj.propertyIsEnumerable('name'));
+
+		console.log(new Date().toLocaleString());//2016/6/12 下午9:53:31
+		console.log(new Date().toString());//Sun Jun 12 2016 21:53:50 GMT+0800 (中国标准时间)
+
+		console.log(obj.valueOf());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

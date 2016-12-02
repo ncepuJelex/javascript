@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽象工厂</title>
+	<script src="../commons/CommonUtil.js"></script>
+
+	<script type="text/javascript">
+		
+		// 细粒度 粗粒度
+		// 万事万物皆对象 去什么商店—>商店->卖车<-生产车
+
+		// 搭建一个工厂的环境
+		// 卖车的商店 可能 有 玛沙拉蒂4s,宾利4s等等
+
+		// CarShop是一个抽象类
+
+		function CarShop() {}
+
+		CarShop.prototype = {
+			constructor : CarShop,
+			sell : function(type) {
+				
+				this.abstractSellCar(type);
+			},
+			abstractSellCar : function() {
+				throw new Error('抽象类，你不能直接调用的SB');
+			}
+		}
+
+		// 宾利4s店
+		function BentleyCarShop() {
+
+		}
+		Jel.extend(BentleyCarShop,CarShop);
+		BentleyCarShop.prototype = {
+			constructor : BentleyCarShop,
+			sell : function(type) {
+				var car;
+				var types = ['Bentley-x','Bentley','Bentley-z'];
+				for(var t in types) {
+					if(types[t] === type) {
+						car = CarFactory.createCar(type);
+						return car;
+					}
+				}
+				alert('Sorry,没你想要的战车!');
+			}
+		}
+
+
+		function LamborghiniCarShop() {
+
+		}
+		Jel.extend(LamborghiniCarShop,CarShop);
+		LamborghiniCarShop.prototype = {
+			constructor : LamborghiniCarShop,
+			sell : function(type) {
+				var car = CarFactory.createCar(type);
+				return car;
+			}
+		}
+
+
+		// 保时捷4s店
+
+
+		// 兰博基尼4s店
+
+
+
+		//生产car的工厂来了！
+		var CarFactory = {
+
+			createCar : function(type) {
+				// 这招牛逼吧！
+				var car = eval('new ' + type + '()');
+				Jel.Interface.ensureImplemented(car,CarInterface);
+				return car;
+			}
+		};
+
+
+		var CarInterface = new Jel.Interface('CarInterface',['start','run']);
+
+
+		function BaseCar() {}
+		BaseCar.prototype = {
+			constructor : BaseCar,
+			start : function() {
+				alert(Jel.getFnName(this.constructor) + ' ..start');
+			},
+			run : function() {
+				// alert(this.constructor.name + ' ..run');
+				alert(Jel.getFnName(this.constructor) + ' ..run');//这样可以支持IE
+			}
+		}
+
+
+
+		function Bentley() {}
+		Jel.extend(Bentley,BaseCar);
+		// 注意：想要扩展子类的方法，必须在extend方法之后进行，不然会报错，具体原因请查看Jel.extend源码
+		Bentley.prototype.fly = function() {
+			alert('look！' + Jel.getFnName(this.constructor) + ' can fly...');
+		}
+
+		function Maserati() {}
+		Jel.extend(Maserati,BaseCar);
+
+		function Lamborghini() {}
+		Jel.extend(Lamborghini,BaseCar);
+
+		function Porsches() {}
+		Jel.extend(Porsches,BaseCar);
+
+		var shop = new BentleyCarShop();
+		var bentleyCar = shop.sell('Bentley');
+		if(bentleyCar) {
+			bentleyCar.run();
+			bentleyCar.fly();
+		}
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则-定位符</title>
+	<script type="text/javascript">
+		
+		// var str = '%$^&$&……3455';
+		var str = '……';
+		var reg = /\W+/gi;	//记住\w和\W是相反的意思，同理\s和\S,\d和\D，这里表示非单词，自己查看运行结果
+		alert(str.match(reg));
+
+		/*var str = '%$^& $&	……&3455';
+		var reg = /\S+/gi;	//非空白字符
+		alert(str.match(reg));*/
+
+		/*var str = 'abcfgs4534';
+		// var reg = /[a-z]/g;
+		// var reg = /[A-Z]/g; //结果为null
+		// var reg = /[cfg54]/g;  //结果 c,f,g,4,5,4
+		// var reg = /[^cfg54]/g;  //结果 a,b,s,3
+		// var reg = /[^a-c54]/g;  //结果 f,g,s,3
+		var reg = /\D/g;  //结果 a,b,c,f,g,s
+		alert(str.match(reg));*/
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

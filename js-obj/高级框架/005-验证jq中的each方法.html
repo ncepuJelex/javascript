@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="jquery-1.12.2.min.js"></script>
+	<script type="text/javascript">
+
+
+		window.onload = function() {
+
+			var arr = [1,2,3,4];
+
+			$.each(arr,function(i,v) {
+				console.log(i,v);
+				if(v === 2) {
+					return false;
+				}
+				console.log(this);
+			});
+		}
+		
+	</script>
+</head>
+<body>
+</body>
+</html>

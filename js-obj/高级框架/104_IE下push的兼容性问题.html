@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>IE下push方法的兼容性问题</title>
+
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	
+	<script type="text/javascript">
+
+		/*
+			这是jquery源码中的push方法的部分源码
+		*/
+		function myPush(targets,elems) {
+			var j = targets.length,
+				i = 0;
+			while((targets[j++] = elems[i++])) {}
+			targets.length = j - 1;
+		}
+
+		/*
+			应该把try ... catch中的片段抽出来，放到一个对象中，毕竟函数本身也是一个对象，
+			这样，在不兼容的时候，每次调用getTag方法时性能可以提高些
+		*/
+		var getTag = function(tag,results) {
+			results = results || [];
+			try {
+				results.push.apply(results,document.getElementsByTagName(tag));
+			} catch(e) {
+				myPush(results,document.getElementsByTagName(tag));
+			}
+			return results;
+		}
+
+		var each = function(arr,fn) {
+			for(var i=0; i<arr.length; i++) {
+				if(fn.call(arr[i],i,arr[i]) === false) {
+					break;
+				}
+			}
+		};
+
+		window.onload = function() {
+
+			each(getTag('p',getTag('div')),function(i,v) {
+				this.style.backgroundColor = 'darkblue';
+			});
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<p></p>
+	<p></p>
+</body>
+</html>

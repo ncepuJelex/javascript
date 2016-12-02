@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>装饰者模式</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+		var CarInterface = new Jel.Interface("CarInterface",["getPrice","assemble"]);
+
+		/* var Car = function(car) {
+			this.car = car;
+			Jel.Interface.ensureImplemented(this,CarInterface);
+		}*/
+		 function Car(car) {
+			this.car = car;
+			Jel.Interface.ensureImplemented(this,CarInterface);
+		}
+
+		Car.prototype = {
+			constructor : Car,
+			getPrice : function() {
+				return 3000000;
+			},
+			assemble : function() {
+				document.write('没有组装之前…');
+			}
+		}
+
+		function LightCar(car) {
+			LightCar.superClass.constructor.call(this,car);
+		}
+		Jel.extend(LightCar,Car);
+		LightCar.prototype = {
+			constructor : LightCar,
+			getPrice : function() {
+				return this.car.getPrice() + 20000;
+			},
+			assemble : function() {
+				document.write('组装车灯…');
+			}
+		}
+		var CarriageDecorator = function(car) {
+			CarriageDecorator.superClass.constructor.call(this,car);
+		}
+		Jel.extend(CarriageDecorator,LightCar);
+		CarriageDecorator.prototype = {
+			constructor : CarriageDecorator,
+			getPrice : function() {
+				return this.car.getPrice() + 30000;
+			},
+			assemble : function() {
+				document.write('组装车灯和车载冰箱…');
+			}
+		}
+
+
+		var car = new Car();
+		alert(car.getPrice());
+		car.assemble();
+
+		car = new LightCar(car);
+		alert(car.getPrice());
+		car.assemble();
+
+		car = new CarriageDecorator(car);
+		alert(car.getPrice());
+		car.assemble();
+
+
+		// =====================
+
+		function getDate() {
+			return (new Date()).toString();
+		}
+
+		function getDateDecorator(fn) {
+			return function() {
+				return fn.call(this,arguments).toUpperCase();
+			}
+		}
+
+		var date = getDate();
+		document.write("<br>-------------<br>");
+		document.write(date);
+		document.write("<br>-------------<br>");
+		var decoratorFn = getDateDecorator(getDate);
+		date = decoratorFn();
+		document.write(date);
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

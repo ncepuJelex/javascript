@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>传统做法</title>
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	<script type="text/javascript">
+
+			// 传统的处理方式，就是使用函数获得
+			var get = function(tag) {
+				return document.getElementsByTagName(tag);
+			}
+
+		window.onload = function() {
+
+			// 获得div和p元素
+			// var divs = get('div');
+			// var ps = get('p');
+			var divs = document.getElementsByTagName('div');
+			div ps = document.getElementsByTagName('p');
+			
+			for(var i=0; i<divs.length; i++) {
+				divs[i].style.backgroundColor = 'pink';
+			}
+			for(var i=0; i<ps.length; i++) {
+				ps[i].style.backgroundColor = 'skyblue';
+			}
+
+			// 以上写得不好的原因
+			// 1.代码冗余
+			// 2.丑
+			// 3.复用
+			// 4.容错
+			// 5.效率
+			// 6.性能
+			// ... ...
+
+			// 解决方法：函数化
+		}
+		
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<p></p>
+	<p></p>
+</body>
+</html>

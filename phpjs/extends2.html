@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承2</title>
+	<script type="text/javascript">
+		
+		function Person(name,age) {
+			this.name = name;
+			this.age = age;
+			this.speak = function() {
+				alert(this.name + "," + this.age);
+			}
+		}
+
+		function Student(name,age,stuNo) {
+			this.stuNo = stuNo;
+			Person.call(this,name,age);
+			this.study = function() {
+				alert(this.stuNo + '要考100分');
+			}
+		}
+
+		var stu = new Student('zs',19,99);
+		stu.speak();
+		stu.study();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

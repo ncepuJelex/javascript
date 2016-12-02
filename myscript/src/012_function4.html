@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		//this:运行时基于执行环境所绑定的对象
+		//this关键字总是指向调用者
+
+		var k = 10;
+		function test() {
+			var k = 3;
+			this.k = 20;
+			console.log("test.k" + k);
+		}
+		window.test();
+		console.log(this.k);
+		console.log(k);
+		console.log(test.k);//undefined
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

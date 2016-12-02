@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>链式函数编程调用</title>
+	<script type="text/javascript">
+		
+		function Dog() {
+			this.run = function() {
+				alert('狗仔跑得真快！');
+				return this;
+			}
+			this.eat = function() {
+				alert('狗仔好久没吃饭了，好可怜！');
+				return this;
+			}
+			this.howl = function() {
+				alert('狗仔吼的声音真雄浑！');
+				return this;
+			}
+		}
+
+		var d1 = new Dog();
+		d1.run().eat().howl();
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

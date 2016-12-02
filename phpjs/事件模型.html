@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件模型</title>
+	<script type="text/javascript">
+		
+		function preventSubmit(evt) {
+			if(window.event) {
+				window.event.returnValue = false;
+			} else {
+				evt.preventDefault();
+			}
+		}
+
+		window.onload = function() {
+
+			document.getElementById('submit').onclick = function() {
+				var test = document.getElementById('test').value;
+				// if(test.replace(/(^\s*)|(\s*$)/g,'').length==0) {
+				if(!test.replace(/(^\s*)|(\s*$)/g,'')) {
+					preventSubmit(event);
+				}
+			}
+			
+		};
+
+	</script>
+</head>
+<body>
+	
+	<form id="form" action="http://www.jd.com">
+		
+		<input type="text" id="test" /><br>
+		<input type="submit" id="submit" value="提交" />
+	</form>
+
+</body>
+</html>

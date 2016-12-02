@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>工厂模式1</title>
+	<script src="../commons/CommonUtil.js"></script>
+
+	<script type="text/javascript">
+		
+		function CarShop() {}
+
+		CarShop.prototype = {
+			constructor : CarShop,
+			sell : function(type) {
+				var car;
+				switch(type) {
+					case 'Bentley':
+						car = new Bentley();
+						break;
+					case 'Maserati':
+						car = new Maserati();
+						break;
+					case 'Lamborghini':
+						car = new Lamborghini();
+						break;
+					case 'Porsches':
+						car = new Porsches();
+						break;
+					default :
+						'not my favor,rubbish';
+				}
+				Jel.Interface.ensureImplemented(car,CarInterface);
+				return car;
+			}
+		}
+
+
+		var CarInterface = new Jel.Interface('CarInterface',['start','run']);
+
+
+		function BaseCar() {}
+		BaseCar.prototype = {
+			constructor : BaseCar,
+			start : function() {
+				alert(Jel.getFnName(this.constructor) + ' ..start');
+			},
+			run : function() {
+				// alert(this.constructor.name + ' ..run');
+				alert(Jel.getFnName(this.constructor) + ' ..run');//这样可以支持IE
+			}
+		}
+
+
+
+		function Bentley() {}
+		Jel.extend(Bentley,BaseCar);
+		// 注意：想要扩展子类的方法，必须在extend方法之后进行，不然会报错，具体原因请查看Jel.extend源码
+		Bentley.prototype.fly = function() {
+			alert('look！' + Jel.getFnName(this.constructor) + ' can fly...');
+		}
+
+		function Maserati() {}
+		Jel.extend(Maserati,BaseCar);
+
+		function Lamborghini() {}
+		Jel.extend(Lamborghini,BaseCar);
+
+		function Porsches() {}
+		Jel.extend(Porsches,BaseCar);
+
+		var shop = new CarShop();
+		var car = shop.sell('Bentley');
+		car.start();
+		car.run();
+		car.fly();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

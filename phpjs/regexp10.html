@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式的特殊用法</title>
+	<script type="text/javascript">
+		
+		// (?=) 正向预查
+		// (?!) 负向预查
+		// (?:) 结果不被捕获
+
+		/*var str = '徐振华好人！徐振华是金庸迷……徐振华努力学习';
+		// var reg = /徐振华/gi; //能查出3个徐振华
+		// var reg = /徐振华(?!好人)/gi; //只能好人之前的那个徐振华
+		var reg = /徐振华(?!好人)/gi; //查询出不是‘好人’之前的那个徐振华
+		alert(str.match(reg));
+		alert(RegExp.lastIndex);//IE下有效*/
+
+		var str = 'hello javascript,hello spring';
+		var reg = /hello(?:\sjavascript|\sspring)/gi;//这样就不会捕获javascript和spring了，结果是hello javascript和hello spring
+		// alert(str.match(reg));
+		var result;
+		while(result=reg.exec(str)) {
+			alert(result);
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单休模式</title>
+	<script type="text/javascript">
+		
+		/*最简单的单体模式*/
+		/*var Singleton = {
+			attr1 : true,
+			attr2 : 19,
+			method1 : function() {
+				alert('方法1');
+			},
+			method2 : function() {
+				alert('方法2');
+			}
+
+		};
+
+		alert(Singleton.attr2);*/
+
+		// 划分命名空间
+		/*var Jel = {};
+
+		Jel.Singleton = {
+
+			attr1 : true,
+			attr2 : 19,
+			method1 : function() {
+				alert('方法1');
+			},
+			method2 : function() {
+				alert('方法2');
+			}
+		};
+
+		Jel.Singleton.method2();*/
+
+		// 借用闭包创建单体,闭包主要的目的：保护数据
+
+		var Jel = {};
+
+		Jel.Singleton = (function() {
+
+			// 添加自己的私有成员
+			var a1 = true;
+			var a2 = 29;
+			var f1 = function() {
+				alert('be yourself');
+			};
+			var f2 = function() {
+				console.log('be NO.1');
+			}
+
+			// 把块级作用域的执行结果赋值给单体对象
+			return {
+				attr1 : a1,
+				attr2 : a2,
+				method1 : function() {
+					// alert('方法1');
+					return f1();
+				},
+				method2 : function() {
+					// alert('方法2');
+					return f2();
+				}
+			};
+		})();
+
+		/*(function() {
+			alert('test');//会执行的！
+		})();*/
+
+		alert(Jel.Singleton.attr1);
+		Jel.Singleton.method1();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

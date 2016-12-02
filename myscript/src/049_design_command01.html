@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>命令模式01</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+		// 命令模式是一种封装方法的调用的方式
+		// 想想崔希凡老师的图书管理系统中bookdao中的细节
+
+		// 要执行一件事件：命令1 命令2 命令3 。。。
+
+		// 命令模式的调用者 和 接收者
+
+		// 有一个按钮， 点击它 触发几个元素执行一些动画效果
+		// 比如3个命令：1.start 2.execute 3.stop
+
+		// 命令模式的主要概念：调用者只需要执行相应的命令即可，不需要去关心具体怎么执行的。
+
+		/*var CommandInterface = new Jel.Interface('CommandInterface',['execute']);
+
+		var StartCommand = function (obj) {
+			this.ad = obj;
+		};
+
+		var StopCommand = function(obj) {
+			this.ad = obj;
+		};
+
+		StartCommand.prototype.execute = function() {
+			this.ad.start();
+		};
+		StopCommand.prototype.execute = function() {
+			this.ad.stop();
+		};
+
+
+		var startComm = new StartCommand(obj);
+		startComm.execute();
+		var stopComm = new StopCommand(obj);
+		stopComm.execute();
+*/
+	
+		// 命令模式有很多种，下面是闭包命令模式
+		/*functon MakeStart(obj) {
+			return functon() {
+				obj.start();
+			};
+		}	
+
+		function MakeStop(obj) {
+			return function() {
+				obj.stop();
+			};
+		}
+
+		var startComm = new MakeStart(obj);
+		startComm();*/
+
+		// 客户、调用者、接收者
+		// 客户创建命令 调用者执行命令 接收者具体做相应操作
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

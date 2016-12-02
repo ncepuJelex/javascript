@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+
+	<link rel="stylesheet" href="css/style.min.css" />
+	<script type="text/javascript" src="js/jstree.js"></script>
+
+	<script type="text/javascript">
+
+		$(function() {
+			$("#container").jstree({
+				'core' : {
+					'data' : [
+						{
+							"text" : "Root Node", "children" : [
+								{"text" : "Child Node 1"},
+								{"text" : "Child Node 2"}
+							]
+						}
+					]
+				}
+			});
+		});
+
+	</script>
+</head>
+<!-- 
+	jstree会去解析你放在core.data中的键值对 并使用它来创建tree,
+	如果key不存在，则会去解析HTML上的代码。
+
+	tree的每个分支以 js 中的 object展现，它必须有名称为"text"的key，需要知道的是，children对应一个数组对象。
+
+	note:如果你需要的是固定文本名称的Node,你可以使用一个简写的string代替
+	Object 的形式：
+	[ { "text" : "Root node", "children" : [ "Child node 1", "Child node 2" ] } ]
+
+	对于 每个节点，有这样一些设置：
+
+		id : 作为LI节点的DOM ID;
+
+		icon:字符串形式，可以是一个文件路径，或者(一个或多个)className，可在css文件中编写;
+
+		data : 它是你所需要的一切！和Node关联一起东西，它和样式无关;
+
+		state:和Node相关的一些选项：
+			selected: 初始化的时候是否被选中;
+			opened:初始化的时候是否是打开状态;
+			disabled:是否被禁用;
+
+			checked :checkbox专用的，节点是否被选中（只有当设置tie_selection为 false的时候使用，并且只有当你确实知道是做什么的时候才用吧！）;
+
+		undetermined : checkbox专用，用于懒加载render;
+		
+		type - types plugin specific - the type of the nodes (should be defined in the types config), if not set "default" is assumed;
+
+		li_attr - object of values which will be used to add HTML attributes on the resulting LI DOM node;
+
+		a_attr - object of values which will be used to add HTML attributes on the resulting A node.	
+
+			
+ -->
+<body>
+	<div id="container"></div>
+</body>
+</html>

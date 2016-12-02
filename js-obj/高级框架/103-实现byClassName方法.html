@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现byClassName方法</title>
+
+	<style type="text/css">
+		
+		div {
+			width: 400px;
+			height: 50px;
+			margin: 20px 0;
+		}
+		div.c1 {
+			border: 1px solid red;
+		}
+		div.c {
+			border: 1px solid skyblue;
+		}
+		div.c2 {
+			border: 1px solid green;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+
+		var support = {};
+		support.getElementsByClassName = (function() {
+			var exists = !!document.getElementsByClassName;
+			if(exists && typeof document.getElementsByClassName == 'function') {
+				var div = document.createElement('div'),
+					divWithClass= document.createElement('div');
+				divWithClass.className = 'c';
+
+				div.appendChild(divWithClass);
+
+				return div.getElementsByClassName('c')[0] == divWithClass;
+			}
+			return false;
+		})();
+
+		var getClass = function(className,results) {
+
+			results = results || [];
+			if(support.getElementsByClassName) {
+				results.push.apply(results,document.getElementsByClassName(className));
+			} else {
+				// 自己实现
+				//1.先获取所有元素
+				// 2.搜索符合要求的，加入到数组中
+				var tempArr;
+				tempArr = document.getElementsByTagName("*");
+				for(var i=0; i<tempArr.length; i++) {
+					if((' ' + tempArr[i].className + ' ').indexOf(' ' + className + ' ') != -1) {
+						results.push(tempArr[i]);
+					}
+				}
+			}
+			return results;
+		};
+
+		window.onload = function() {
+
+			var list = getClass('c');
+			for(var k in list) {
+				list[k].style.backgroundColor = 'green';
+			}
+			
+		};
+
+
+	</script>
+</head>
+<body>
+	
+	<div class="c1">div1</div>
+	<div class="c2">div2</div>
+	<div class="c">div3</div>
+	<div class="c1">div4</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承1</title>
+	<script type="text/javascript">
+		
+		Object.prototype.ext = function(parentObj) {
+			for(var attr in parentObj) {
+				this[attr] = parentObj[attr];
+			}
+		}
+
+		function Person(name,age) {
+			this.name = name;
+			this.age = age;
+			this.speak = function() {
+				alert(this.name + "," + this.age);
+			}
+		}
+
+		function Student(stuNo) {
+			this.stuNo = stuNo;
+			this.study = function() {
+				alert(this.stuNo + '要考100分');
+			}
+		}
+
+		var stu = new Student(100);
+		stu.ext(new Person('xiaoA',23));
+		stu.speak();
+		stu.study();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

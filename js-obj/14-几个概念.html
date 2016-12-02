@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function F() {}
+
+		var o = new F();
+
+		console.log(o.__proto__ === F.prototype);	//true
+
+		//__proto__是非标准属性
+
+		// 原型
+
+		// F.prototype	原型属性
+		// o.__proto__  原型对象
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

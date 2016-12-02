@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优化each</title>
+
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	
+	<script type="text/javascript">
+
+		var get = function(tag) {
+			return document.getElementsByTagName(tag);
+		}
+
+		var each = function(arr,fn) {
+			for(var i=0; i<arr.length; i++) {
+				if(fn.call(arr[i],i,arr[i]) === false) {
+					break;
+				}
+			}
+		};
+
+		window.onload = function() {
+
+			var divs = get('div');
+			var ps = get('p');
+console.log(divs,ps);
+			each(divs,function(i,v) {
+				this.style.backgroundColor = 'green';
+			});
+			each(ps,function(i,v) {
+				this.style.backgroundColor = 'green';
+			});
+
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<p></p>
+	<p></p>
+</body>
+</html>

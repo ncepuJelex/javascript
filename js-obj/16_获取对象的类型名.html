@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function Person() {
+
+		}
+
+		var p = new Person();
+		var con = p.constructor;
+
+		console.log(con);
+		// function Person() {
+
+		// }
+
+		// 将函数转换为字符串
+		var s = "" + con;
+		// 将function与(之间的字符串截取出来
+		// 方法1
+		/*s = s.replace("function","^");
+		var start = s.indexOf("^")+2;
+		var end = s.indexOf("(");
+		if(start != -1 && end != -1) {
+			var name = s.slice(start,end);
+			console.log(name);
+		}*/
+
+		//方法2 
+		/*var regexp = /function (.+?)\(/;
+		var name = regexp.exec(s)[1];
+		console.log(name);*/
+
+
+		// 方法3，IE8不支持
+		console.log(con.name);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则5</title>
+	<script type="text/javascript">
+		
+		var content = '2222jdslgjl;j3265064&(%564$^7r764dr$E#djsldsgs5346323567fgh32564';
+		/*var reg = /\d{4}/gi;	//连续的4个数字
+		var result;
+		while(result=reg.exec(content)) {
+			alert(result);
+		}*/
+
+	/*	var reg = /(\d)\1{3}/gi;	//连续的4个一样的数字
+		var result;
+		while(result=reg.exec(content)) {
+			alert(result);
+		}*/
+			/*var content = 'abcdgs345467763442';
+		
+			var reg = /(\d)(\d)\2\1/gi;	//表示1221，4664，6996等数字
+			var result;
+			while(result=reg.exec(content)) {
+				alert(result);
+			}*/
+
+	/*	var content = 'AABB7733GGHHFFJI';
+		
+		var reg = /(\w)\1(\w)\2/gi;	//查找AACC,FF88等
+		var result;
+		while(result=reg.exec(content)) {
+			alert(result);
+		}*/
+
+		/*var content = 'abcdgs345<div>王宝强离婚</div><p>bitch马蓉宋喆</p>467763442';
+		
+		var reg = /<(\w+)>.+<\/\1>/gi;	//html元素,.表示\n之外的任意字符
+		alert(content.match(reg));*/
+		
+		/*var str = 'javascript453javascriptjava129java666javabootstrap888node.js234';
+		var reg = /(\w+)(\d){3}\1/gi;
+		var result;
+		while(result=reg.exec(str)) {
+			alert(result);
+		}*/
+
+		var str = '133145547997js234';
+		var reg = /(\d)(\d)\2\1/gi;
+		var result;
+		while(result=reg.exec(str)) {
+			alert(result);
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

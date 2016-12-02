@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		/*function Person(name,age) {
+			this.name = name;
+			this.age = age;
+		}
+
+		Person.prototype.id = 101;
+
+		function Boy(name,age,sex) {
+			Person.call(this,name,age);
+			this.sex = sex;
+		}
+
+		var b = new Boy('xiaoSan',25,'男');
+		console.log(b);//但是没有id属性，哎！*/
+
+
+		function Person(name,age) {
+			this.name = name;
+			this.age = age;
+		}
+
+		Person.prototype.id = 101;
+		Person.prototype.sayName = function() {
+			console.log(this.name);
+		}
+		function Boy(name,age,sex) {
+			Person.call(this,name,age);//继承父类的模板
+			this.sex = sex;
+		}
+		Boy.prototype = new Person();//继承父类的原型对象
+
+		var b = new Boy('xiaoSan',25,'男');
+		console.log(b);//什么都有了！
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

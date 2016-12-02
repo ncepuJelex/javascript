@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>工厂模式1</title>
+	<script src="../commons/CommonUtil.js"></script>
+
+	<script type="text/javascript">
+		
+		function CarShop() {}
+
+		CarShop.prototype = {
+			constructor : CarShop,
+			sell : function(type) {
+				var car;
+				switch(type) {
+					case 'Bentley':
+						car = new Bentley();
+						break;
+					case 'Maserati':
+						car = new Maserati();
+						break;
+					case 'Lamborghini':
+						car = new Lamborghini();
+						break;
+					case 'Porsches':
+						car = new Porsches();
+						break;
+					default :
+						'not my favor,rubbish';
+				}
+				Jel.Interface.ensureImplemented(car,CarInterface);
+				return car;
+			}
+		}
+
+
+		var CarInterface = new Jel.Interface('CarInterface',['start','run']);
+
+
+		function Bentley() {}
+		Bentley.prototype.start = function() {
+			alert('Bentley.start');
+		}
+		Bentley.prototype.run = function() {
+			alert('Bentley.run');
+		}
+
+		function Maserati() {}
+		Maserati.prototype.start = function() {
+			alert('Maserati.start');
+		}
+		Maserati.prototype.run = function() {
+			alert('Maserati.run');
+		}
+
+
+		function Lamborghini() {}
+		Lamborghini.prototype.start = function() {
+			alert('Lamborghini.start');
+		}
+		Lamborghini.prototype.run = function() {
+			alert('Lamborghini.run');
+		}
+
+		function Porsches() {}
+		Porsches.prototype.start = function() {
+			alert('Porsches.start');
+		}
+		Porsches.prototype.run = function() {
+			alert('Porsches.run');
+		}
+
+		var shop = new CarShop();
+		var car = shop.sell('Porsches');
+		car.start();
+		car.run();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

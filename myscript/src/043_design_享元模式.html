@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>享元模式</title>
+	<script type="text/javascript">
+		
+		var Car = function (manufactor,model,year,own,tag,renewDate) {
+			this.manufactor = manufactor;
+			this.model = model;
+			this.year = year;
+			this.own = own;
+			this.tag = tag;
+			this.renewDate = renewDate;
+		};
+
+		Car.prototype = {
+			constructor : Car,
+			getManufactor : function() {
+				return this.manufactor;
+			},
+			getModel : function() {
+				return this.model;
+			},
+			getYear : function() {
+				return this.year;
+			},
+			getRenewDate : function() {
+				return this.renewDate;
+			}
+		};
+
+		var arr = [];
+
+		var startDate = new Date().getTime();
+
+		for(var i=0; i<500000; i++) {
+			arr.push(new Car('Beney','master','2016-08-31'),'CR7','no.7','2016-08-30');
+		}
+
+		var endDate = new Date().getTime();
+
+		document.write(endDate-startDate);//716ms or more
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

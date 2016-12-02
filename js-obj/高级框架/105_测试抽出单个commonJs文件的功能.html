@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试common.js方法</title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		
+		div,p {
+			width: 400px;
+			height: 50px;
+			margin: 20px 0;
+		}
+		div {
+			border: 1px solid lightBlue;
+		}
+		div.c1 {
+			border: 1px solid red;
+		}
+		div.c {
+			border: 1px solid skyblue;
+		}
+		div.c2 {
+			border: 1px solid green;
+		}
+		p {
+			border: 2px solid blue;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+
+
+		window.onload = function() {
+
+			var list = get('#p1');
+			/*for(var k in list) {
+				list[k].style.backgroundColor = 'orange';
+			}*/
+			each(list,function(i,v) {
+				v.style.backgroundColor = 'orange';
+			})
+			
+		};
+
+
+	</script>
+</head>
+<body>
+	
+	<div class="c1">div1</div>
+	<div class="c2">div2</div>
+	<div class="c">div3</div>
+	<div class="c1">div4</div>
+
+	<div></div>
+	<div></div>
+	<p id="p1"></p>
+	<p></p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+	
+	/**
+		interface Composite {
+			function add(obj);
+			function remove(obj);
+			function update(obj);
+		}
+	*/
+
+	var CompositeImpl = function() {
+
+	}
+
+	CompositeImpl.prototype = {
+
+		constructor : CompositeImpl,
+		add : function(obj) {
+			// do sth
+		},
+		remove : function(obj) {
+			// do sth
+		},
+		update : function(obj) {
+			// do sth
+		}
+	}
+
+	var c1 = new CompositeImpl();
+	var c2 = new CompositeImpl();
+	alert(c1.add == c2.add);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

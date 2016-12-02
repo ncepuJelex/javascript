@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>适配器</title>
+	<script type="text/javascript">
+		
+
+		var obj = {
+			"str1" : "111",
+			"str2" : "222",
+			"str3" : "333"
+		};
+
+		// 适配器
+		function adapter(obj) {
+			interfaceMethod(obj.str1, obj.str2, obj.str3);
+		}
+
+		function interfaceMethod(x,y,z) {
+			// do sth
+		}
+
+
+		// Prototype程序员这样写
+		function $() {
+			var elems = [];
+			for(var i=0; i<arguments.length; i++) {
+				var elem = arguments[i];
+				if(typeof elem === 'string') {
+					elem = document.getElementById(elem);
+				}
+				if(arguments.length == 1) {
+					return elem;
+				}
+				elems.push(elem);
+			}
+			return elems;
+		}
+
+		// 雅虎YUI程序员这样写
+		var YUI = {};
+		YUI.get = function(ele) {
+			
+			if(typeof ele == 'string') {
+				return document.getElementById(ele);
+			}
+			if(ele instanceof Array) {
+				var elems = [];
+				for(var i=0; i<ele.length; i++) {
+					elems[elems.length] = YUI.get(ele[i]);	
+				}
+				return elems;
+			}
+			if(ele) {
+				return ele;
+			}
+			return null;
+		};
+
+		// YUI和Prototype之间的适配器
+		YUI.get = PrototypeToYUI;
+		function PrototypeToYUI() {
+			if(arguments.length == 1 ) {
+				var ele = arguments[0];
+				return $.apply(window,ele instanceof Array ? ele : [ele]);
+			} else {
+				return $.apply(window, arguments);
+			}
+		} 
+
+		window.onload = function() {
+			// var elems = YUI.get('inpu1');
+			// var elems = YUI.get(['inpu1']);
+			// var elems = YUI.get('input1','input2');
+			var elems = YUI.get(['input1','input2']);
+			console.log(elems);
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="input1">
+	<br>
+	<input type="text" id="input2">
+</body>
+</html>

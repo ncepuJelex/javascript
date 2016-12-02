@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		var itcast = {
+			tag : function(tagName) {
+				return document.getElementsByTagName(tagName);
+			},
+			id : function(idName) {
+				return document.getElementById(idName);
+			}
+		};
+
+
+	</script>
+</head>
+<body>
+	<br/><br/><br/><br/><br/>
+</body>
+	<script type="text/javascript">
+			itcast.tag('body')[0].style.border = "1px solid red";
+	</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则2</title>
+	<script type="text/javascript">
+
+	/*g：表示全局匹配：
+	  i：表示ignore,即忽略大小写
+	*/
+
+		//隐式创建（推荐）
+		/*var reg = /\d/gi;
+		alert(typeof reg);
+		alert(reg.constructor);*/
+
+		
+		/*如果使用直接实例化，那么反斜杠需要转义*/
+		//直接实例化
+		var reg = new RegExp("abcd","gi");
+		alert(typeof reg);
+		alert(reg.constructor);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

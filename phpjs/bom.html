@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>BOM</title>
+	<script type="text/javascript">
+		document.write(navigator.appCodeName + "<br>");
+		document.write(navigator.appName + "<br>");
+		document.write(navigator.appVersion + "<br>");
+		document.write(navigator.platform + "<br>");
+		document.write(navigator.cookieEnabled + "<br>");
+		document.write(navigator.onLine + "<br>");
+
+		var str = window.navigator.appVersion;
+		var index = str.indexOf("MSIE");
+		if(index > -1) {
+			alert('IE');
+		}
+		else {
+			alert('W3C');
+		}
+
+		var x = window.screen.width;
+		var y = window.screen.height;
+		document.write('你的屏幕分辨率：' + x + '*' + y);
+	</script>
+</head>
+<body>
+
+</body>
+</html>

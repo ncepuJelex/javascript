@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>代理模式</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+		var LibraryInterface = new Jel.Interface('LibraryInterface',['addBook','findBook','checkoutBook','returnBook']);
+
+		var Book = function(id,title,author) {
+			this.id = id;
+			this.title = title;
+			this.author = author;
+		};
+
+		var Library = function(books) {
+			this.books = books;
+		};
+
+		Library.prototype = {
+			constructor : Library,
+			addBook: function(book) {
+				this.books[book.id] = book;
+			},
+			findBook : function(id) {
+				if(this.books[id]) {
+					return this.books[id];
+				}
+				return null;
+			},
+			checkoutBook : function(id) {
+				//电脑登记
+				return this.books.findBook(id);
+			},
+			returnBook : function(book) {
+				// 电脑登记
+				this.books[book.id] = book;
+			}
+		};
+
+		var LibraryProxy = function(books) {
+			alert('只产生代理对象');
+			this.books = books;
+			this.Library = null;
+		};
+
+		LibraryProxy.prototype = {
+			constructor : LibraryProxy,
+
+			initial : function() {
+				if(!this.Library) {
+					alert('真正产生本体对象');
+					this.Library = new Library(this.books);
+				}
+			},
+			addBook: function(book) {
+				this.initial();
+				// this.books[book.id] = book;
+				this.Library.addBook(book);
+			},
+			findBook : function(id) {
+				this.initial();
+				/*if(this.books[id]) {
+					return this.books[id];
+				}
+				return null;*/
+				return this.Library.findBook(id);
+			},
+			checkoutBook : function(id) {
+				this.initial();
+				//电脑登记
+				// return this.books.findBook(id);
+				return this.Library.checkoutBook(id);
+			},
+			returnBook : function(book) {
+				this.initial();
+				// 电脑登记
+				// this.books[book.id] = book;
+				this.Library.returnBook(book);
+			}
+		};
+
+		var proxy = new LibraryProxy(
+
+			{
+				'001' : new Book('001','javascript经典','rinho'),
+				'002' : new Book('002','java设计模式','xxman'),
+				'003' : new Book('003','Spring in action','老外'),
+				'004' : new Book('004','金庸小说全集','金庸')
+			}
+		);
+
+		// alert(proxy.findBook('004'));
+		console.log(proxy.findBook('004'));
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

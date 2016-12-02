@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function Sup(name) {
+			this.name = name;
+		}
+
+		Sup.prototype = {
+			constructor:Sup,
+			sayName : function() {
+				console.log(this.name);
+			}
+		}
+
+		function Sub(age) {
+			this.age = age;
+		}
+
+		var sub1 = new Sub(30);
+		console.log(sub1.constructor);
+
+		// 继承的前戏
+		Sub.prototype = new Sup('张三');
+		console.log(Sub.prototype.constructor);
+
+		var sub2 = new Sub();
+		console.log(sub2.name);
+		sub2.sayName();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

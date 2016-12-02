@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		var a1 = 10; 
+		var a2 = 10.4;
+		var a3 = NaN;
+		var a4 = 1/0;
+
+		console.log(a1);
+		console.log(a2);
+		console.log(a3);
+		console.log(a4);
+
+		var a5 = 070; //8进制数，十进制数的56
+		console.log(a5);
+
+		var a6 = 0xA;
+		console.log(a6);
+
+		var a7 = 0.1;
+		var a8 = 0.2;
+
+		if(a7+a8 == 0.3) {
+			alert("yes");
+			
+		} else {
+			console.log(a7+a8);
+			console.log("no");
+		}
+
+
+		var a9 = parseInt("aabbcc");
+		console.log(a9);//NaN
+
+		var a10 = parseInt("12aabbcc");
+		console.log(a10);//12
+
+		// undefined 数据类型：它的值只有一个，undifined
+		var b;//声明但未赋值
+		console.log(b);
+		if(typeof b === 'undefined') {
+			alert("ok,undefined");//会被执行到
+		}
+
+		var str1 = "str1";
+		
+		console.log(str1.constructor.name);//String
+		console.log(typeof str1);//string,注意小写开头
+		console.log(str1.constructor);
+
+		var bool = true;
+		console.log(typeof bool);//boolean
+		console.log(bool.constructor.name);//Boolean
+
+		var arr = [1,2,3];
+		var date = new Date();
+		var obj = {};
+		
+		console.log(arr);
+		console.log(date);
+		console.log(obj);	
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

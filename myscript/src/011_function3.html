@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function test(a,b,c,d) {
+
+			console.log(test.length);//函数的形参
+
+			//函数的实际内部使用arr去接收
+			//arguments:可以访问实际参数,不能离开函数作用域
+
+			console.log('实参个数：' + arguments.length);
+			console.log(arguments[0]);
+			console.log(arguments[2]);//undefined
+
+			//arguments:在递归中使用的多
+
+			//指向自己本身
+			console.log(arguments.callee.length);
+
+			if(test.length == arguments.callee.length) {
+				return a+b;
+			}
+			return '参数不正确';
+
+		}
+
+		console.log(test(10,30,undefined,NaN));
+
+
+		function fact(num) {
+			if(num <=1 ) {
+				return 1;
+			}
+			else {
+				// return num*fact(num-1);//当使用这句时，并且调用46行代码时会报错，但使用callee就不会
+				return num*arguments.callee(num-1);
+			}
+		}
+
+		console.log(fact(4));//24
+		var F = fact;
+		fact = null;
+
+		console.log(F(5));
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

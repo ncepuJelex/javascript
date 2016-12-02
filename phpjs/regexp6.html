@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则6</title>
+	<script type="text/javascript">
+		
+		/*var str = '小说紫阳哎，莫问夜逍遥javascript33453223jasg';
+		var reg = /\d{3,}/gi;	//{3}和{3,}的效果不一样哦
+		alert(str.match(reg));
+
+
+		// var reg = /\d{3,5}/gi; //非贪婪模式，结果33453,223
+		var reg = /\d{3,5}?/gi;	//对比上面，又不同了,贪婪模式，如果在表达式后面加入?m则表示非贪婪模式,结果334,532
+		alert(str.match(reg));*/
+
+
+		var str = 'ags32525634dfhd%&*^%dsgs32425';
+		// var reg = /\d*/gi;
+		var reg = /\d+/gi;
+		alert(str.match(reg));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

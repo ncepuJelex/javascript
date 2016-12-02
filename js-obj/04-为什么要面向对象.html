@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		// $('<p>我是一个自然段</p>').appendTo('body');
+		/*var p = document.createElement("p");
+		var txt = document.createNodeText("...");
+		p.appendChild(txt);
+
+		document.body.appendChild(p);*/
+
+		// 可以获得指定标签的所有内容
+		function tag(tag) {
+			return document.getElementsByTagName(tag);
+		}
+
+		//指定ID的元素
+		function id(id) {
+			return document.getElementById(id);
+		}
+
+		onload = function() {
+
+			// var div = document.getElementsByTagName('div')[0];
+			var div = tag('div')[0];
+			// var p = document.getElementsByTagName('p')[0];
+			var p = tag('p')[0];
+			div.style.border = '1px solid red';
+			p.style.border = '2px solid skyblue';
+
+			var a = id('alink');
+			a.style.border = '1px solid blue';
+		}
+	</script>
+</head>
+<body>
+	
+	<div>div</div>
+	<div>div</div>
+	<div>div</div>
+	<p>p</p>
+	<p>p</p>
+
+	<a href="">1234</a>
+	<a href="">1234</a>
+	<a href="" id="alink">1234</a>
+	<a href="">1234</a>
+	<a href="">56745</a>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function Person() {
+
+		}
+
+		Person.prototype.name = 'zs';
+		Person.prototype.age = 99;
+		Person.prototype.sex = '男';
+		Person.prototype.sayHello = function() {
+			console.log(this);
+		}
+
+		var p1 = new Person();
+		console.log(p1);
+		p1.sayHello();
+		// 获取原型对象
+		var protoObj = Object.getPrototypeOf(p1);
+		console.log(protoObj);
+
+		console.log(protoObj == p1.__proto__);//true
+	
+		p1.name = 'ls';
+		console.log(p1);//name:ls
+		delete p1.name;
+		console.log(p1);//name:zs
+
+		//判断是对象属性还是原型属性
+		var p2 = new Person();
+		console.log(p2.hasOwnProperty('name'));//false
+		p2.name = 'p2';
+		console.log(p2.hasOwnProperty('name'));//true
+
+		var p3 = new Person();
+		// 判断'name'属性是否在p3对象中或者原型对象中
+		console.log('name' in p3);//true
+
+		console.log('name' in p2);//true
+
+		// 判断是否在原型中
+		function hasPrototpeProperty(obj,pro) {
+			return !obj.hasOwnProperty(pro) && pro in obj;
+		}
+
+		var p4 = new Person();
+		console.log(hasPrototpeProperty(p4,'name'));//true
+		p4.name = 'xiaoB';
+		console.log(hasPrototpeProperty(p4,'name'));//false
+
+		//ECMA5新特性：Object.keys(obj),返回一个数组
+
+		var p5 = new Person();
+		p5.name = 'xiaoSan';
+		p5.age = 28;
+		var attrs = Object.keys(p5);
+		console.log(attrs);//["name", "age"]
+
+		console.log(Person.prototype);
+
+		//ECMA5 constructor属性 不能被枚举
+		var props = Object.getOwnPropertyNames(Person.prototype);
+		//["constructor", "name", "age", "sex", "sayHello"]
+		console.log(props);
+		props = Object.getOwnPropertyNames(Person);
+		//["length", "name", "arguments", "caller", "prototype"]
+		console.log(props);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

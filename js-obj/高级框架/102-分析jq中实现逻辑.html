@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分析jquery中的实现逻辑</title>
+	<script type="text/javascript">
+		
+		var support = {};
+		support.getElementsByClassName = (function() {
+			var exists = !!document.getElementsByClassName;
+			if(exists && typeof document.getElementsByClassName == 'function') {
+				var div = document.createElement('div'),
+					divWithClass= document.createElement('div');
+				divWithClass.className = 'c';
+
+				div.appendChild(divWithClass);
+
+				return div.getElementsByClassName('c')[0] == divWithClass;
+			}
+			return false;
+		})();
+		
+
+		// support.getElementsByClassName = !!document.getElementsByClassName;
+		window.onload = function() {
+			if(support.getElementsByClassName) {
+				var select = document.createElement('select');
+
+				document.getElementsByTagName('body')[0].appendChild(select);
+				console.log(select);
+				var op = new Option('尚学堂','java1');
+				select.options.add(op);
+				op = new Option('尚硅谷','java2');
+				select.options.add(op);
+				op = new Option('传智播客','java3');
+				select.options.add(op);
+			}
+			else {
+				alert('不支持class方法');
+			}
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

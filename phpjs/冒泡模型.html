@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡模型</title>
+
+	<style>
+		#div1{width:400px;height:400px;background:red}
+		#div2{width:300px;height:300px;background:skyblue}
+		#div3{width:200px;height:200px;background:orange}
+	</style>
+	<script type="text/javascript">
+		
+		window.onload = function() {
+
+			document.getElementById("div1").onclick=action;
+			document.getElementById("div2").onclick=action;
+			document.getElementById("div3").onclick=action;
+
+			
+		}
+
+		function action(evt) {
+			alert(this.id);
+			noBubble(evt);
+		}
+
+		function noBubble(evt) {
+			if(window.attachEvent) {//或者window.event
+				event.cancelBubble = true;
+			}
+			else {
+				evt.stopPropagation();
+			}
+		}
+
+	</script>
+</head>
+<body>
+	
+	<div id="div1">
+		<div id="div2">
+			<div id="div3"></div>
+		</div>
+	</div>
+
+</body>
+</html>

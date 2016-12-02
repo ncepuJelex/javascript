@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>检测byClassName方法与效率检测</title>
+	<script type="text/javascript">
+		
+		/*if(node.getElementsByClassName) {
+			return node.getElementsByClassName(className);
+		} else {
+			return 自己定义实现
+		}*/
+
+		/*
+			在全局使用域中（最终都要变成沙箱闭包）提供一个support方法，
+			里面提供了所有的与方法名相同的属性，值均为boolean
+			在浏览器加载js的开始时候，就进行能力判断，将与方法名相同属性作为真和假存储，那么凡是涉及到能力检查的时候 ，直接使用support即可！
+		*/
+		var support = {};
+		support.getElementsByClassName = !!document.getElementsByClassName;
+
+		window.onload = function() {
+
+			if(support.getElementsByClassName) {
+				var select = document.createElement('select');
+
+				document.getElementsByTagName('body')[0].appendChild(select);
+				console.log(select);
+				var op = new Option('尚学堂','java1');
+				select.options.add(op);
+				op = new Option('尚硅谷','java2');
+				select.options.add(op);
+				op = new Option('传智播客','java3');
+				select.options.add(op);
+
+			}
+		}
+
+
+		var x;
+		// alert(!!x);//false
+		x = undefined;
+		// alert(!!x);//false
+		x = null;
+		// alert(!!x);//false
+		x = 0;
+		// alert(!!x);//false
+		x = "0";
+		// alert(!!x);//true
+		x="1";
+		// alert(!!x);//true
+		x = 1;
+		// alert(!!x);//true
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

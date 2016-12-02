@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function sum(x,y) {
+			return x+y;
+		}
+
+		function call1(num1,num2) {
+			return sum.call(this,num1,num2);
+		}
+
+		function apply1(num1,num2) {
+			return sum.apply(this,[num1,num2]);
+		}
+
+		var re = call1(10,20);
+		console.log(re);
+		re = apply1(20,30);
+		console.log(re);
+
+		window.color = 'red';
+
+		var obj = {color:'blue'};
+
+		function showColor() {
+			console.log(this.color);
+		}
+
+		showColor.call(this);//red,window调用
+		showColor.call(obj);//blue，obj调用
+
+
+		function test1(a,b) {
+			return a+b;
+		}
+
+		function Obj(x,y) {
+			this.x = x;
+			this.y = y;
+			return x*y;
+		}
+
+		var o = new Obj(13,12);
+		o.method = test1;
+		console.log(o.method(o.x,o.y));
+		delete o.method;
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

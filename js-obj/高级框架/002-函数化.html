@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数化</title>
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	<script type="text/javascript">
+
+		// 传统的处理方式，就是使用函数获得
+		var get = function(tag) {
+			return document.getElementsByTagName(tag);
+		}	
+
+		var each = function(arr) {
+			for(var i=0; i<arr.length; i++) {
+				arr[i].style.backgroundColor = 'pink';
+			}
+		}
+
+		window.onload = function() {
+
+			// 获得div和p元素
+			var divs = get('div');
+			var ps = get('p');
+
+			each(divs);
+			each(ps);
+
+			// 两个for循环,这？？？接着改！
+		}
+		
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<p></p>
+	<p></p>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		/**
+		interface Composite {
+			function add(obj);
+			function remove(obj);
+			function update(obj);
+		}
+
+		interface FormItem {
+			function select(obj);
+		}
+	*/
+
+	var CompositeImpl = function() {
+		this.implementsInterfaces = ['Composite','FormItem'];
+	}
+
+	CompositeImpl.prototype = {
+
+		constructor : CompositeImpl,
+		add : function(obj) {
+			// do sth
+			alert('add..');
+		},
+		remove : function(obj) {
+			// do sth
+		},
+		update : function(obj) {
+			// do sth
+		},
+		select : function(obj) {
+
+		}
+	}
+
+
+	function checkImplements(instance) {
+			if(!isImplements(instance,'Composite','FormItem')) {
+					throw new Error('还有未实现的接口类哦！赶紧实现去！');
+			}
+		}
+
+		function isImplements(object) {
+			for(var i=1; i<arguments.length; i++) {
+				var implemented = false;
+				var interfaceName = arguments[i];
+				for(var j=0; j<object.implementsInterfaces.length; j++) {
+					if(object.implementsInterfaces[j] == interfaceName) {
+						implemented = true;
+						break;
+					}
+				}
+
+				if(!implemented) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		var c1 = new CompositeImpl();
+		checkImplements(c1);
+		c1.add();
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

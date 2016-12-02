@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+	/*function Person() {
+
+	}
+
+	Person.prototype = {
+		// constructor : Person,	//重要哦
+		name : 'hs',
+		age : 108,
+		job : 'Engineer',
+		say : function() {
+			console.log(this);
+		}
+	};
+
+	var p1 = new Person();
+	console.log(p1);
+	p1.say();
+	console.log(Person.prototype.constructor);
+
+	// ECMA5中给对象重新设计构造器：Object.defineProperty()
+	// 3个参数：重设构造器的对象，设置什么属性，options配置项
+
+	Object.defineProperty(Person.prototype,'constructor',{
+		enumerable : false,
+		value : Person
+	});
+
+	console.log(Person.prototype.constructor);
+	console.log('====================')
+	
+	for(var p in p1) {
+		console.log(p);
+	}
+*/
+	// 原型的动态特性
+
+	function Person() {
+
+	}
+	var p1 = new Person();
+
+	Person.prototype = {
+		constructor : Person,	//重要哦
+		name : 'hs',
+		age : 108,
+		job : 'Engineer',
+		say : function() {
+			console.log(this);
+		}
+	};
+
+	/*Person.prototype.say =  function(){
+		console.log("我是方法");
+	}*/
+
+	p1.say();//error,先写原型再new Person()才行！
+	// 即实例对象必须在原型对象之后创建
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

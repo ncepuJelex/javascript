@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>观察者模式1</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+		// 报纸订阅
+
+		var publisher = function(name) {
+			this.name = name;//发布者名称(香港民报)
+			this.subscribers = [];//订阅者们
+		};
+
+		publisher.prototype = {
+			constructor : publisher,
+			publish : function(news) {
+				this.subscribers.forEach(function(fn) {
+					fn(news,publisher);//把消息发给订阅者
+				});
+				return this;//链式编程
+			}
+		};
+
+		Function.prototype.subscribe = function(publisher) {
+			var subscriber = this;
+			var whetherSubscribed = publisher.subscribers.some(function(item) {
+				return subscriber === item;
+			});
+
+			if(!whetherSubscribed) {
+				publisher.subscribers.push(this);
+			}
+			return this;
+		};
+
+		Function.prototype.cancel = function(publisher) {
+			var subscriber = this;
+			publisher.subscribers = publisher.subscribers.filter(function(item) {
+				return subscriber !== item;
+			});
+			return this;
+		}
+
+		window.onload = function() {
+
+			var pub1 = new publisher('pub1');
+			var pub2 = new publisher('pub2');
+			var pub3 = new publisher('pub3');
+
+			var sub1 = function(news){
+				document.getElementById('sub1').innerHTML += arguments[1].name + ":" + news + '\n';
+			};
+			var sub2 = function(news){
+				document.getElementById('sub2').innerHTML += arguments[1].name + ":" + news + '\n';
+			};
+
+			sub1.subscribe(pub1).subscribe(pub2).subscribe(pub3);
+			sub2.subscribe(pub1).subscribe(pub2);
+
+			sub1.cancel(pub1);
+
+			var btn1 = document.getElementById('btn1');
+			var btn3 = document.getElementById('btn2');
+			var btn3 = document.getElementById('btn3');
+
+			var text1 = document.getElementById('text1');
+			var text3 = document.getElementById('text2');
+			var text3 = document.getElementById('text3');
+
+			Jel.EventUtil.addHandler(btn1,'click',function() {
+				pub1.publish(text1.value);
+			});
+			Jel.EventUtil.addHandler(btn2,'click',function() {
+				pub2.publish(text2.value);
+			});
+			Jel.EventUtil.addHandler(btn3,'click',function() {
+				pub3.publish(text3.value);
+			});
+
+
+		};
+
+
+	</script>
+</head>
+<body>
+</body>
+	<input id="btn1" type="button" value="第一报社"><input type="text" id="text1" value=""><br/>
+	<input id="btn2"  type="button" value="第二报社"><input type="text" id="text2" value=""><br/>
+	<input id="btn3"  type="button" value="第三报社"><input type="text" id="text3" value=""><br/>
+	<br>
+	<textarea id="sub1" rows="7" cols="30"></textarea>&nbsp;
+	<textarea id="sub2" rows="7" cols="30"></textarea>
+</html>

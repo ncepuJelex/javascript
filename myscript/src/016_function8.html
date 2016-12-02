@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		var name = "xiao A";
+
+		/*var obj = {
+			name : "xiao B",
+
+			getName : function() {
+				return this.name;
+			}
+		}
+
+		console.log(typeof obj.getName);//function
+		console.log(typeof obj.getName());//string*/
+
+
+		/*var obj = {
+			name : "xiao B",
+
+			getName : function() {
+				return function() {
+					return this.name;
+				}
+			}
+		}
+
+		console.log(typeof obj.getName);//function
+		console.log(typeof obj.getName());//function*/
+
+		/*
+		function () {
+			return function() {
+				return this.name;
+			}
+		}
+		*/
+		// console.log(obj.getName);
+		
+		/*
+		function () {
+			return this.name;
+		}
+		*/
+		// console.log(obj.getName());
+
+
+		// console.log(obj.getName()());//xiao A,因为obj调用的
+
+
+		/*var name = "xiao A";
+
+		var obj = {
+			name : "xiao B",
+
+
+			getName : function() {
+
+				var o = this;
+
+				return function() {
+					return o.name;
+				}
+			}
+		}
+
+		console.log(obj.getName()());//xiao B*/
+
+
+		function f(x) {
+			var temp = x;
+			return function(x) {
+				temp += x;
+				console.log(temp);
+			}
+		}
+
+		var a = f(50);
+
+		a(10);//50+10=60
+
+		a(30);//60+30=90
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

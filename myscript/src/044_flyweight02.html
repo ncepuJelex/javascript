@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>享元模式</title>
+	<script type="text/javascript">
+		
+		var Car = function (manufactor,model,year,own,tag,renewDate) {
+			this.manufactor = manufactor;
+			this.model = model;
+			this.year = year;
+		};
+
+		Car.prototype = {
+			constructor : Car,
+			getManufactor : function() {
+				return this.manufactor;
+			},
+			getModel : function() {
+				return this.model;
+			},
+			getYear : function() {
+				return this.year;
+			}
+		};
+
+
+		var CarFactory = (function() {
+
+			var createdCars = [];
+
+			return {
+				createCar : function(manufactor,model,year) {
+					if(createdCars[manufactor+model+year]) {
+						return createdCars[manufactor+model+year];
+					} else {
+						var car = new Car(manufactor,model,year);
+						createdCars[manufactor+model+year] = car;
+						return car;
+					}
+				}
+			}
+
+		})();
+
+		var CarRecordManager = (function() {
+			var recordCarBase = [];
+			return {
+				addCarRecord : function(manufactor,model,year,own,tag,renewDate) {
+					var car = CarFactory.createCar(manufactor,model,year);
+					recordCarBase[tag] = {
+						car : car,
+						own : own,
+						renewDate : renewDate
+					};
+				},
+				renewRegistration : function(renewDate) {
+					recordCarBase[tag].renewDate = renewDate;
+				}
+			}
+		})();
+
+
+		var arr = [];
+
+		var startDate = new Date().getTime();
+
+		for(var i=0; i<500000; i++) {
+			arr.push(new Car('Beney','master','2016-08-31'),'CR7','no.7','2016-08-30');
+			arr.push(CarRecordManager.addCarRecord('Beney','master','2016-08-31','CR7','no.7','2016-08-30'));
+		}
+
+		var endDate = new Date().getTime();
+		/*优化本来就是时间和空间上的平衡和取舍*/
+		document.write(endDate-startDate);//1797ms or more
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

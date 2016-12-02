@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>定时器</title>
+	<script type="text/javascript">
+
+
+		// setTimeout('alert("123")',3000);
+
+
+
+		/*function display() {
+			alert('hello');
+			setTimeout('display()',3000);
+		}
+		display();*/
+
+
+
+		// 会先弹出first,然后每3s后弹出hello
+		/*function display() {
+			alert('hello');
+		}
+		setTimeout('display()',3000);
+		alert('first');*/
+
+
+		function display() {
+			alert('hello');
+		}
+		// setInterval('display()',3000);
+
+		// setTimeout执行时会反复编译，而setInterval只一次
+
+
+		//clearTimout可清除定时器
+		 var timer = setInterval('display()',3000);
+		 clearInterval(timer);
+		 //
+	</script>
+</head>
+<body>
+
+</body>
+</html>

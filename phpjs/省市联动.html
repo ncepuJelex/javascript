@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>省市联动</title>
+	<script type="text/javascript">
+	
+		var provinces = ['请选择','北京','河北','江西','辽宁'];
+
+		var cities = [
+			[],
+			['东城区','西城区','朝阳区','大兴区','昌平区','丰台区'],
+			['保定','石家庄','邯郸','邢台'],
+			['上饶','鹰谭','南昌','新余'],
+			['葫芦岛','鞍山']
+		];
+
+		window.onload = function() {
+
+			createProvince();
+
+			document.getElementById('province').onchange = provinceChange;
+		};
+
+		function createProvince() {
+			var pro = document.getElementById('province');
+			for(var i in provinces) {
+				var op = new Option(provinces[i],provinces[i]);
+				pro.options.add(op);
+			}
+		}
+
+		function provinceChange() {
+			var index = document.getElementById('province').selectedIndex;
+			var city = document.getElementById('city');
+			city.options.length = 0;
+
+			for(var i in cities[index]) {
+				var op = new Option(cities[index][i],cities[index][i]);
+				city.options.add(op);
+			}
+		}
+
+
+	</script>
+</head>
+<body>
+	
+	<select id="province"></select>
+	<select id="city"></select>
+</body>
+</html>

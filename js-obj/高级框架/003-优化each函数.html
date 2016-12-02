@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优化each1</title>
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	<script type="text/javascript">
+
+		// 传统的处理方式，就是使用函数获得
+		var get = function(tag) {
+			return document.getElementsByTagName(tag);
+		}	
+
+		/*var each = function(arr,string) {
+			for(var i=0; i<arr.length; i++) {
+				// 执行string
+				eval(string);//难写
+			}
+		}*/
+
+		var each = function(arr,fn) {
+			for(var i=0; i<arr.length; i++) {
+				fn(i,arr[i]);
+			}
+		}
+
+		window.onload = function() {
+
+			// 获得div和p元素
+			var divs = get('div');
+			var ps = get('p');
+
+			var sum = 0;
+			each(divs,function(v) {
+				sum += v;
+			});
+			each(ps);
+		}
+		
+		// 如果你想遍历数组，你想对数组做什么事情？
+		// 凡是涉及到数组遍历才可以完成的事情（修改，查询）
+
+		var arr = [1,2,3,4];
+		// 要求：
+		// 1.求和
+		var sum = 0;
+		for(var i=0; i<arr.length; i++) {
+			sum += arr[i];
+		}
+		console.log(sum);
+
+		// 2.示求最大值
+		var max = arr[0];
+		for(var i=1; i<arr.length; i++) {
+			if(arr[i] > max) {
+				max = arr[i];
+			}
+		}
+		console.log(max);
+
+		// 3.示最小值 
+		var min = arr[0];
+		for(var i=1; i<arr.length; i++) {
+			if(arr[i] < min) {
+				min = arr[i];
+			}
+		}
+		console.log(min);
+
+		// 4.查找3
+		var findResult = -1;
+		for(var i=0; i<arr.length; i++) {
+			if(arr[i] === 3) {
+				findResult  = i;
+				break;
+			}
+		}
+		console.log(findResult);
+		// 5.查找5
+		// ... ...
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<p></p>
+	<p></p>
+</body>
+</html>

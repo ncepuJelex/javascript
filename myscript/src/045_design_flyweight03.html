@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟日历</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+		var CalendarInterface = new Jel.Interface("CalendarInterface",['display']);
+
+		var Year = function(y,parent) {
+			this.y = y;
+			this.elem = document.createElement('div');
+			this.elem.style = 'none';
+			parent.appendChild(this.elem);
+			// 判断是不是闰年
+			var isLeapYear = function(y) {
+				return (y>0) && !(y%4) && ((y%100) || !(y%400));
+			};
+
+			this.months = [];
+			this.monthDays = [31,isLeapYear(this.y)?29:28,31,30,31,30,31,31,30,31,30,31];
+			for(var i=0; i<12; i++) {
+				this.months[i] = new Month(i,this.monthDays[i],this.elem);
+			}
+		};
+		Year.prototype = {
+			constructor: Year,
+			display : function() {
+				for(var i=0; i<this.months.length; i++) {
+					this.months[i].display();
+				}
+				this.elem.style.display = 'block';
+			}
+		};
+
+		var Month = function(m,dayNum,parent) {
+			this.m = m;
+			this.elem = document.createElement('div');
+			this.elem.style = 'none';
+			parent.appendChild(this.elem);
+
+			this.days = [];
+			for(var i=0; i<dayNum; i++) {
+				this.days[i] = new Day(i+1,this.elem);
+			}
+		};
+		Month.prototype = {
+			constructor : Month,
+			display : function() {
+				for(var i=0; i<this.days.length; i++) {
+					this.days[i].display();
+				}
+				this.elem.style.display = 'block';
+			}
+		};
+
+		var Day = function(d,parent) {
+			this.d = d;
+			this.elem = document.createElement('div');
+			this.elem.style = 'none';
+			parent.appendChild(this.elem);
+		};
+		Day.prototype = {
+			constructor : Day,
+			display : function() {
+				this.elem.style.display = 'inline-block';
+				this.elem.innerHTML = this.d;
+			}
+		};
+
+		window.onload = function() {
+			var myDiv = document.getElementById('myDiv');
+			var myYear = new Year(2016,myDiv);
+			myYear.display();
+		}
+
+	</script>
+</head>
+<body>
+	
+		<div id="myDiv"></div>
+	
+</body>
+</html>

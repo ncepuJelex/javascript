@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>堕性单体</title>
+	<script type="text/javascript">
+		
+		// 堕性单体：和闭包有点类似
+		/*var Ext = {};
+		Ext.Base = (function() {
+
+			// 控制返回的单体对象
+			var uniqueInstance;
+
+
+			function init() {
+
+				var a1 = true;
+				var a2 = 30;
+				var fn1 = function() {
+					alert('fn1');
+				};
+				var fn2 = function() {
+					alert('fn2');
+				};
+
+				return {
+					attr1 : a1,
+					attr2 : a2,
+					method1 : function() {
+						return fn1();
+					},
+					method2 : function() {
+						return fn2();
+					}
+				};
+			}
+
+			return {
+				getInstance : function() {
+
+					if(!uniqueInstance) {
+						uniqueInstance = init();
+					}
+					return uniqueInstance;
+				}
+			};
+
+		})();
+
+		var instance = Ext.Base.getInstance();
+		console.log(instance);
+		alert(instance.attr1);
+		instance.method1();*/
+
+		// 分支单体（判断浏览器之间的差异）
+
+		var Ext = {};
+		var diff = 2;
+		Ext.More = (function() {
+
+			var objA = {//火狐浏览器
+				// 属性1
+				attr1 : 'Firefox'
+			};
+			var objB = {//IE
+				attr1 : 'IE'
+			};
+			var objC = {//Chrome
+				attr1 : 'Chrome'
+			};
+
+
+			return (diff==0 ? objA : (diff==1 ? objB : objC));
+
+		})();
+
+		alert(Ext.More.attr1);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

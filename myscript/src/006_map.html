@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function Map() {
+
+			var obj = {};
+
+			this.put = function(key,value) {
+				obj[key] = value;
+			}
+
+			this.size = function() {
+				var cnt = 0;
+				for(var attr in obj) {
+					cnt ++;
+				}
+				return cnt;
+			}
+
+			this.get = function(key) {
+				if(obj[key] || obj[key] === 0 || obj[key] === false) {
+					return obj[key];
+				}
+				return null;
+			}
+
+			this.remove = function(key) {
+				if(obj[key] || obj[key] === 0 || obj[key] === false) {
+
+					delete obj[key];
+				}
+			}
+
+			this.eachMap = function(fn) {
+				for(var attr in obj) {
+					fn(attr,obj[attr]);
+				}
+			}
+
+		}
+		var m = new Map();
+		m.put('01','abc');
+		m.put('02',0);
+		m.put('03',false);
+		m.put('04',new Date());
+
+		console.log(m.size());//4
+
+		for(var i in m) {
+			console.log(i);//put size get remove
+		}
+		m.remove('03');
+		console.log(m.get('03')); //remove 操作后 结果为：null
+
+		m.eachMap(function(key,value) {
+			console.log(key + "=" + value)
+		});
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		// 每个对象都可以访问到一个属性
+		// 其中有一个是construtcor（构造器）
+		// 每一个对象的constructor属性描述的是其构造函数
+
+		function Fn() {}
+
+		var o = new Fn();
+
+		console.log(o.constructor === Fn);//true
+		// 每一个对象都链接到其原型对象上
+		// 对象的constructor属性是其原型对象提供的
+
+		var obj = {};
+		console.log(obj.constructor);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

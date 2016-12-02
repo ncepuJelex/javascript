@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贪吃蛇</title>
+	<script type="text/javascript">
+		
+		var map = null;//地图
+		var food = null; //食物
+		var snake = null; //蛇
+		var timer = null; //定时器
+		var sum = 0; //积分
+		var text = document.title;//title文本
+
+		function Map() {
+			this.width = 800;
+			this.height = 400;
+			this.position = 'absolute';
+			this.background = 'skyblue';
+			this.domMap = null;
+			this.show = function(){
+				this.domMap = document.createElement('div');
+				this.domMap.style.width = this.width + 'px';
+				this.domMap.style.height = this.height + 'px';
+				this.domMap.style.position = this.position;
+				this.domMap.style.background = this.background;
+
+				document.getElementsByTagName('body')[0].appendChild(this.domMap);
+			}
+		}
+
+		function Food() {
+			this.width = '20px';
+			this.height = 20;
+			this.position = 'absolute';
+			this.x = 0;
+			this.y = 0;
+			this.background = 'red';
+			this.domFood = null;
+
+			this.show = function() {
+				if(this.domFood == null) {
+					this.domFood = document.createElement('div');
+					this.domFood.style.width = this.width;
+					this.domFood.style.height = this.height + 'px';
+					this.domFood.style.position = this.position;
+					this.domFood.style.background = this.background;
+
+					map.domMap.appendChild(this.domFood);
+				}
+				this.x = Math.floor(Math.random()*40);
+				this.y = Math.floor(Math.random()*20);
+				this.domFood.style.left = this.x*20 + 'px';
+				this.domFood.style.top = this.y*20 + 'px';
+			}
+		}
+
+		function Snake() {
+			this.width = '20px';
+			this.height = '20px';
+			this.position = 'absolute';
+			this.direction = 'right';
+
+			this.body = [
+				[3,3,'black',null],
+				[2,3,'orange',null],
+				[1,3,'orange',null]
+			];
+
+			this.domSnake = null;
+
+			this.show = function() {
+				for(var i=0; i<this.body.length; i++) {
+					if(this.body[i][3] == null) {
+						this.body[i][3] = document.createElement('div');
+						this.body[i][3].style.width = this.width;
+						this.body[i][3].style.height = this.height;
+						this.body[i][3].style.position = this.position;
+						this.body[i][3].style.background = this.body[i][2];
+
+						map.domMap.appendChild(this.body[i][3]);
+					}
+					this.body[i][3].style.left = this.body[i][0]*20 + 'px';
+					this.body[i][3].style.top = this.body[i][1]*20 + 'px';
+				}
+			};
+
+			this.move = function() {
+				var length = this.body.length;
+				for(var i=length-1; i>0; i--) {
+					this.body[i][0] = this.body[i-1][0];
+					this.body[i][1] = this.body[i-1][1];
+				}
+				
+				switch(this.direction) {
+					case 'left':
+						this.body[0][0] -= 1;
+						break;
+					case 'up':
+						this.body[0][1] -= 1;
+						break;
+					case 'right':
+						this.body[0][0] += 1;
+						break;
+					case 'down':
+						this.body[0][1] += 1;
+						break; 
+				}
+
+				if(this.body[0][0]==food.x && this.body[0][1] == food.y) {
+					var length = this.body.length-1;
+					var x = this.body[length][0];
+					var y = this.body[length][1];
+					this.body.push([x,y,'orange',null]);
+					//当吃掉一个食物后，立即随机产生一个新食物
+					food.show();
+
+					// 计算积分
+					sum += 1;
+					document.title = text+':共' + sum + '分';
+				}
+
+				//调用显示方法
+				this.show();
+
+				//判断撞墙死
+				if(this.body[0][0]==40 || this.body[0][0]==-1 || this.body[0][1]==-1 || this.body[0][1]==20) {
+					alert('撞墙死');
+					clearTimeout(timer);
+					return;
+				}
+
+				//判断自己自己死
+				for(var i=length-1; i>1; i--) {
+					if(this.body[0][0]==this.body[i][0] && this.body[0][1]==this.body[i][1]) {
+						alert('吃到自己死');
+						clearTimeout(timer);
+						return;
+					}
+				}
+			};
+
+			this.setDirection = function(code) {
+				switch(code) {
+					case 37:
+						snake.direction = 'left';
+						break;
+					case 38:
+						snake.direction = 'up';
+						break;
+					case 39:
+						snake.direction = 'right';
+						break;
+					case 40:
+						snake.direction = 'down';
+						break;
+				}
+			}
+		}
+
+		window.onload = function() {
+			map = new Map();
+			map.show();
+
+			food = new Food();
+			food.show();
+
+			snake = new Snake();
+			snake.show();
+
+			timer = setInterval('snake.move()',200);
+
+			// 上下左右按键事件
+			window.onkeyup = function(event) {
+				var code;
+				if(window.event) {
+					code = window.event.keyCode;
+				} else {
+					code = event.keyCode;
+				}
+				//设置蛇头的方向
+				snake.setDirection(code);
+			}
+		}
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

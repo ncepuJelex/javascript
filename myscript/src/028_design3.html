@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鸭式辨型法</title>
+	<script type="text/javascript">
+		
+		var Interface = function(name, methods) {
+
+			if(arguments.length !== 2) {
+				throw new Error('参数长度必须为2！');
+			}
+			this.name = name;
+			this.methods = [];
+			for(var i=0, len=methods.length; i<len; i++) {
+				if(typeof methods[i] !== 'string') {
+					throw new Error('参数类型必须是string');
+				}
+				this.methods.push(methods[i]);
+			}
+		};
+
+		var CompositeInterface = new Interface('CompositeInterface',['add','delete']);
+
+		var FormItemInterface = new Interface('FormItemInterface',['update','select']);
+
+		var CompositeImpl = function() {
+			
+		}
+
+		CompositeImpl.prototype = {
+
+			constructor : CompositeImpl,
+			add : function(obj) {
+				// do sth
+				alert('add..');
+			},
+			delete : function(obj) {
+				// do sth
+			},
+			update : function(obj) {
+				// do sth
+			},
+			select : function(obj) {
+
+			}
+		}
+
+		Interface.ensureImplemented = function(object) {
+
+			if(arguments.length < 2) {
+				throw new Error('参数个数不能小于2！');
+			}
+
+			for(var i=1, len = arguments.length; i<len; i++) {
+				var instanceInterface = arguments[i];
+
+				if(instanceInterface.constructor !== Interface) {
+					throw new Error('必须为接口类型参数');
+				}
+				for(var j=0; j<instanceInterface.methods.length; j++) {
+					var methodName = instanceInterface.methods[j];
+					if(!object[methodName] || typeof object[methodName] !== 'function') {
+						throw new Error('方法\'' + methodName + '\' 没找到！')
+					}
+				}
+				
+			}
+		};
+
+
+		var c1 = new CompositeImpl();
+
+		Interface.ensureImplemented(c1,CompositeInterface,FormItemInterface);
+
+		c1.add();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

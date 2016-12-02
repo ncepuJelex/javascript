@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function test(a,b) {
+			return a+b;
+		}
+
+		var result = test(10,20);
+		console.log(result);
+		console.log(typeof test);
+
+		function test1(aa) {
+			aa();
+		}
+
+		function test2() {
+			console.log('hello,jel');
+		}
+
+		test1(test2);
+
+		test1(function() {
+			console.log("i'm annonymous function");
+		});
+
+		//尽量不要这样去使用 
+		function test3() {
+			function test4() {
+				console.log('我是test4');
+			}
+			test4();
+		}
+
+		test3();
+
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

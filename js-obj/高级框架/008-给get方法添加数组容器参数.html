@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优化each</title>
+
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	
+	<script type="text/javascript">
+
+		// 简化get方法
+		var getTag = function(tag,results) {
+			results = results || [];
+			// 看下一行的巧妙！！！
+			results.push.apply(results,document.getElementsByTagName(tag));
+			return results;
+		}
+
+		var each = function(arr,fn) {
+			for(var i=0; i<arr.length; i++) {
+				if(fn.call(arr[i],i,arr[i]) === false) {
+					break;
+				}
+			}
+		};
+
+		window.onload = function() {
+
+			/*var divs = getTag('div');
+			var ps = getTag('p');
+
+			each(divs,function(i,v) {
+				this.style.backgroundColor = 'orange';
+			});
+			each(ps,function(i,v) {
+				this.style.backgroundColor = 'blue';
+			});*/
+
+			// var list = getTag('div');
+			// list = getTag('p',list);
+
+			each(getTag('p',getTag('div')),function(i,v) {
+				this.style.backgroundColor = 'darkblue';
+			});
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<p></p>
+	<p></p>
+</body>
+</html>

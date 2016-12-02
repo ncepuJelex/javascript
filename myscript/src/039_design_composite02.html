@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组合模式2</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+
+		var CompositeInterface = Jel.Interface("CompositeInterface",["addChild","getChild"]);
+
+		var LeafInterface = Jel.Interface("LeafInterface",["hardWorking","sleep"]);
+
+		var Composite = function(name) {
+			this.name = name;
+			this.children = [];
+			this.type = "Composite";
+		};
+
+		Composite.prototype = {
+			constructor : Composite,
+			addChild : function(child) {
+				this.children.push(child);
+				return this;
+			},
+			getChild : function(name) {
+
+				var elements = [];
+
+				var pushLeaf = function(item) {
+					if(item.type === 'Composite') {
+						item.children.each(arguments.callee);
+					} else if(item.type === 'Leaf') {
+						elements.push(item);
+					}
+				};
+
+				if(name && this.name !== name) {
+					this.children.each(function(item) {
+						if(item.name === name && item.type === 'Composite') {
+							item.children.each(pushLeaf);
+						} 
+						if(item.name !== name && item.type === 'Composite'){
+							item.children.each(arguments.callee);
+						}
+						if(item.name === name && item.type === 'Leaf') {
+							elements.push(item);
+						}
+					});
+				} else {
+					this.children.each(pushLeaf);
+				}
+				return elements;
+			},
+			hardWorking : function(name) {
+				var leafObjects = this.getChild(name);
+				for(var i=0; i<leafObjects.length; i++) {
+					leafObjects[i].hardWorking();
+				}			
+			},
+			sleep : function(name) {
+				var leafObjects = this.getChild(name);
+				for(var i=0; i<leafObjects.length; i++) {
+					leafObjects[i].sleep();
+				}	
+			}
+		}
+
+		var Leaf = function(name) {
+			this.name = name;
+			this.type = "Leaf";
+		};
+
+		Leaf.prototype = {
+			constructor : Leaf,
+			addChild : function(child) {
+				throw new Error('叶子结点不能增加孩子哦！');
+			},
+			getChild : function(name) {
+				if(this.name = name) {
+					return this;
+				}
+				return null;
+			},
+			hardWorking : function() {
+				document.write(this.name + ', 挺住！好好工作！');
+			},
+			sleep : function(name) {
+				document.write(this.name + ', 你太累了！让你休息1小时！');
+			}
+		}
+
+		var p1 = new Leaf('xiaoA');
+		var p2 = new Leaf('sB');
+		var p3 = new Leaf('zhangSan');
+		var p4 = new Leaf('liSi');
+		var p5 = new Leaf('wangWu');
+		var p6 = new Leaf('zhaoLiu');
+
+		var p7 = new Leaf('xiao7');
+		var p8 = new Leaf('s8');
+		var p9 = new Leaf('zhang9');
+		var p10 = new Leaf('li10');
+		var p11 = new Leaf('wang11');
+		var p12 = new Leaf('zhao12');
+
+		// ---------------------
+		var dept1 = new Composite('北京IT');
+		var dept2 = new Composite('北京财务');
+
+		var dept3 = new Composite('上海IT');
+		var dept4 = new Composite('上海财务');
+		
+		dept1.addChild(p1).addChild(p2).addChild(p3);
+		dept2.addChild(p4).addChild(p5).addChild(p6);
+
+		dept3.addChild(p7).addChild(p8).addChild(p9);
+		dept4.addChild(p10).addChild(p11).addChild(p12);
+
+		// ---------------------
+		var subOrg1 = new Composite('北京分公司');
+		var subOrg2 = new Composite('上海分公司');
+
+		subOrg1.addChild(dept1).addChild(dept2);
+
+		subOrg2.addChild(dept3).addChild(dept4);
+
+		var org = new Composite('华电');
+		org.addChild(subOrg1).addChild(subOrg2);
+
+		org.hardWorking('上海分公司');
+		document.write('<br>----------<br>');
+		org.hardWorking('sB');
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

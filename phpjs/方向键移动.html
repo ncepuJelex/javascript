@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>方向键移动</title>
+	<script type="text/javascript">
+		
+		window.onload = function () {
+			document.getElementById('test').onkeyup = function(event) {
+				var keycode;
+				if(window.event) {
+					keycode = window.event.keyCode;
+				} else {
+					keycode = event.keyCode;
+				}
+				var div = document.getElementById('div');
+				switch(keycode) {
+					case 37:
+						div.style.left = (parseInt(div.style.left)-3) + 'px';
+						break;
+					case 38:
+						div.style.top = (parseInt(div.style.top) -3) + 'px';
+						break;
+					case 39:
+						div.style.left = (parseInt(div.style.left)+3) + 'px';
+						break;
+					case 40:
+						div.style.top = (parseInt(div.style.top) +3) + 'px';
+						break;
+				}
+			}
+		}
+
+	</script>
+</head>
+<body>
+	
+	<input type="text" id="test" />
+	<br>
+	<br>
+	<div id="div" style="width:30px;height:30px;background:skyblue;position:absolute; left:20px;top:40px;"></div>
+</body>
+</html>

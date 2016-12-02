@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function extend(sub,sup) {
+			var F = new Function();
+			F.prototype = sup.prototype;
+			sub.prototype = new F();
+			sub.prototype.constructor = sub;
+			sub.superClass = sup.prototype;
+			if(sup.prototype.constructor == Object.prototype.constructor) {
+				sup.prototype.constructor = sup;
+			}
+		}
+
+		function Person(name,age) {
+			this.name = name;
+			this.age = age;
+		}
+
+		Person.prototype = {
+			// constructor : Person,
+			sayHello : function() {
+				console.log('hello world');
+			}
+		}
+
+		function Boy (name, age, sex) {
+			Boy.superClass.constructor.call(this,name,age);
+			this.sex = sex;
+		}
+
+		// Boy.prototype = new Person();
+		extend(Boy,Person);
+
+		Boy.prototype.sayHello = function() {
+			console.log('hi world');
+		}
+
+		var b = new Boy('zs',40,'男');
+
+		Boy.superClass.sayHello.call(b);
+		console.log(b);
+		alert(b.name);
+		alert(b.age);
+		alert(b.sex);
+		b.sayHello();
+		alert(b.constructor);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

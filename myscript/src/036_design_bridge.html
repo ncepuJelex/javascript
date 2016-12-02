@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>桥接模式</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript" src="../commons/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		
+		// 桥接模式：主要把抽象和现实分开 使独立变化
+
+		// 应用场景：事件监听回调机制（用户点击一个按钮，向服务器发送消息）
+
+		// 当页面加载完毕后执行函数体
+
+		$(function() {
+
+			// var inp = $("#inp")[0];
+			var inp = document.getElementById("inp");
+
+			Jel.EventUtil.addHandler(inp,'click',bridgeHandler);
+		});
+
+
+		// 看我怎么解耦
+		function bridgeHandler() {
+			var msg = this.value;
+			sendReq(msg);
+		}
+
+		// 处理后台的程序
+		function sendReq(msg) {
+			// ajax
+			/*$.post('url',data,function(result) {
+				// ......
+			});*/
+
+			alert('发送了一条信息: ' + msg + '到后台,等着回应吧你!');
+		}
+
+	</script>
+</head>
+<body>
+	
+	<input type="button" id="inp" value="我是数据...">
+
+</body>
+</html>

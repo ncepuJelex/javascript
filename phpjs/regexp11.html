@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则学习工具</title>
+	<script type="text/javascript">
+		
+		window.onload = function() {
+
+			document.getElementById('btn1').onclick = function() {
+				var content = document.getElementById('content').value;
+				var exp = document.getElementById('exp').value;
+				// var reg = eval('\/' + exp + '\/gi');//这样也可以
+				var reg = eval('/' + exp + '/gi');
+				// alert(reg.constructor);
+				var result = reg.test(content);
+				document.getElementById('result').value = result;
+			};
+			document.getElementById('btn2').onclick = function() {
+				var content = document.getElementById('content').value;
+				var exp = document.getElementById('exp').value;
+				var reg = eval('/' + exp + '/gi');
+
+				var result;
+				document.getElementById('result').value = '';
+				while(result=reg.exec(content)) {
+					document.getElementById('result').value += result + '\n';
+				}
+			};
+			document.getElementById('btn3').onclick = function() {
+				var content = document.getElementById('content').value;
+				var exp = document.getElementById('exp').value;
+				var reg = eval('/' + exp + '/gi');
+				var result = content.search(reg);
+				document.getElementById('result').value = result;
+			};
+			document.getElementById('btn4').onclick = function() {
+				var content = document.getElementById('content').value;
+				var exp = document.getElementById('exp').value;
+				var reg = eval('/' + exp + '/gi');
+				var result = content.match(reg);
+				document.getElementById('result').value = result;
+			};
+			document.getElementById('btn5').onclick = function() {
+				var content = document.getElementById('content').value;
+				var exp = document.getElementById('exp').value;
+				var reg = eval('/' + exp + '/gi');
+				var result = content.replace(reg,'*');
+				document.getElementById('result').value = result;
+			};
+			document.getElementById('btn6').onclick = function() {
+				var content = document.getElementById('content').value;
+				var exp = document.getElementById('exp').value;
+				var reg = eval('/' + exp + '/gi');
+				var result = content.split(reg);
+				document.getElementById('result').value = result;
+			};	
+		}
+
+	</script>
+</head>
+<body align="center">
+	
+	内容：<input type="text" id="content" size="40"><br><br>
+	正则：<input type="text" id="exp" size="40"><br><br>
+	结果：<textarea id="result" cols="40" rows="7"></textarea><br><br>
+	<input type="button" id="btn1" value="test">
+	<input type="button" id="btn2" value="exec">&nbsp;
+	<input type="button" id="btn3" value="search">
+	<input type="button" id="btn4" value="match">
+	<input type="button" id="btn5" value="replace">
+	<input type="button" id="btn6" value="split">
+</body>
+</html>

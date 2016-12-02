@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		/*var obj = new Object();
+
+		obj.name = 'zs';
+		obj.sex = '男';
+		obj.sayName = function() {
+			console.log('my name is :' + this.name);
+		}
+
+	obj.sayName();
+		// console.log(obj.sayName());*/
+
+/*		
+		//工厂形式创建
+		function createPerson(name,sex,age) {
+			var obj = new Object();
+			obj.name = name;
+			obj.sex = sex;
+			obj.age = age;
+
+			obj.sayHello = function() {
+				console.log("My Name: " + this.name);
+			}
+
+			return obj;
+		}
+
+		var p1 = createPerson('tom','M',30);
+		console.log(p1);
+		p1.sayHello();
+
+		var p2 = createPerson('jerry','F',21);
+		console.log(p2);*/
+
+
+		function Person(name, age, sex) {
+			this.name = name;
+			this.age = age;
+			this.sex = sex;
+			this.sayHello = function() {
+				console.log(this.name);
+			}
+		}
+
+		var p1 = new Person('h',88,'男');
+		var p2 = new Person('h',88,'男');
+		console.log(p1);
+		p1.sayHello();
+
+		console.log(p1 == p2);//false
+
+		console.log(typeof p1.constructor);//function
+		console.log(p1.constructor === Person);//true
+		console.log(p2 instanceof Person);//true
+		console.log(p2 instanceof Object);//true
+
+		Person('xsg','女',23);
+		console.log(window.name);//xsg,直接挂到全局变量中了
+
+		var o = new Object();
+		Person.call(o,'xiaosi','男',43);
+		console.log(o);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

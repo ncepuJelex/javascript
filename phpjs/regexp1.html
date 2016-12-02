@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式1</title>
+	<script type="text/javascript">
+		
+		var str = 'hello,java8script!';
+		var reg = /java/gi;//匹配字符串'java'
+		alert(reg.test(str));
+
+		reg = /\d/gi;//匹配是否有数字
+		alert(reg.test(str));
+
+		str = '15o03127938';
+		reg = /\D/gi;//判断是否有非数字
+		alert(reg.test(str));
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

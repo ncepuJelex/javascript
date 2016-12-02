@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		//垃圾收集 方法1 标记
+		//方法2：引用记数
+		function test() {
+			var a = 10;//被使用 count=1
+			var b = 20;//被使用
+
+			var c = a;//a被c使用，引用了 //count=2
+
+
+		}
+
+		test();//执行完毕后，又被 标记一次，未被使用
+
+
+		// 高级程序语言 java for if 块级作用域概念
+		// js没有块级作用域概念
+/*
+		function test2() {
+			for(var i=0; i<5; i++) {
+				console.log(i);
+			}
+			console.log(i);//5
+		}
+
+		test2();*/
+
+		// js:() 表示执行,表示单独的作用域
+
+		function test2() {
+
+			(function() {
+				for(var i=0; i<5; i++) {
+				console.log(i);
+				}
+			})();
+
+			// console.log(i);//会报错，undefined
+		}
+
+		test2();
+
+
+		(function() {
+			alert("dmt");
+		})();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

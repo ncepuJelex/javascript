@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<script type="text/javascript">
+		
+		var o1 = {'name':'heng','age':24,'sex':"M"};
+
+		var o2 = {
+			scores: {
+				math:138,
+				English:129,
+				Chinese:110
+			}
+		};
+
+		/*for (i in o2) {
+			o1[i] = o2[i];
+		}*/
+
+
+		o2.extend = function(obj) {
+			for(var k in obj) {
+				this[k] = obj[k];
+			}
+		}
+
+		o2.extend(o1);
+
+		o2.extend({
+			id: function(id) {},
+
+			tag:function(tag){},
+
+			err:function(msg) {
+				throw new Error(msg);
+			}
+		});
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

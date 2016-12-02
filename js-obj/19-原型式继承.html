@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		var o = {};
+
+		o.name = "Jelex";
+
+		// var Person = function() {};
+		function Person() {};
+
+		var p = new Person();
+		alert(p.constructor.name);//Person
+
+		Person.prototype.sayHello = function() {
+			alert("hello");
+		};
+
+	
+		Person.prototype = {
+			constructor:Person,//有了这句后第31行结果就是Person了
+			sayGoodBye : function() {},
+			sayGoodBye2 : function() {},
+			sayGoodBye3 : function() {}
+		}
+
+		p = new Person();
+		alert(p.constructor.name);//Object
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

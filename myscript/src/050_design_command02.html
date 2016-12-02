@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>命令模式01</title>
+	<script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		
+		// 命令模式是一种封装方法的调用的方式
+		// 想想崔希凡老师的图书管理系统中bookdao中的细节
+
+		// 要执行一件事件：命令1 命令2 命令3 。。。
+
+		// 命令模式的调用者 和 接收者
+
+		// 有一个按钮， 点击它 触发几个元素执行一些动画效果
+		// 比如3个命令：1.start 2.execute 3.stop 
+
+		// 命令模式的主要概念：调用者只需要执行相应的命令即可，不需要去关心具体怎么执行的。
+
+		var CommandInterface = new Jel.Interface('CommandInterface',['execute','undo']);
+
+		var MoveUp = function (cursor) {
+			this.cursor = cursor;
+		};
+		MoveUp.prototype = {
+			constructor : MoveUp,
+			execute : function() {
+				this.cursor.move(0,-10);
+			},
+			undo : function() {
+				this.cursor.move(0,10);
+			}
+		};
+
+		var MoveDown = function(cursor) {
+			this.cursor = cursor;
+		};
+		MoveDown.prototype = {
+			constructor : MoveDown,
+			execute : function() {
+				this.cursor.move(0,10);
+			},
+			undo : function() {
+				this.cursor.move(0,-10);
+			}
+		};
+
+		var MoveLeft = function(cursor) {
+			this.cursor = cursor;
+		};
+		MoveLeft.prototype = {
+			constructor : MoveLeft,
+			execute : function() {
+				this.cursor.move(-10,0);
+			},
+			undo : function() {
+				this.cursor.move(10,0);
+			}
+		};
+
+		var MoveRight = function(cursor) {
+			this.cursor = cursor;
+		};
+		MoveRight.prototype = {
+			constructor : MoveRight,
+			execute : function() {
+				this.cursor.move(10,0);
+			},
+			undo : function() {
+				this.cursor.move(-10,0);
+			}
+		};
+
+		var Cursor = function(width,height,parent) {
+			this.width = width;
+			this.height = height;
+			this.parent = parent;
+
+			this.position = {
+				x : width/2,
+				y : height/2
+			};
+
+			this.canvas = document.createElement('canvas');
+			this.canvas.width = this.width;
+			this.canvas.height = this.height;
+
+			parent.appendChild(this.canvas);
+
+			// canvas 上下文ctx
+			this.ctx = this.canvas.getContext('2d');
+			this.ctx.fillStyle = 'skyblue';
+			this.move(0,0);//初始化位置
+		};
+
+		Cursor.prototype = {
+			constructor : Cursor,
+			move : function(x,y) {
+				this.position.x += x;
+				this.position.y += y;
+				this.ctx.clearRect(0,0,this.width,this.height);
+				this.ctx.fillRect(this.position.x,this.position.y,20,20);
+			}
+		};
+
+		var UndoDecorator = function(command,undoStack) {
+			this.command = command;
+			this.undoStack = undoStack;
+		};
+		UndoDecorator.prototype = {
+			constructor : UndoDecorator,
+			execute : function() {
+				this.undoStack.push(this.command);
+				this.command.execute();
+			},
+			undo : function() {
+				this.command.undo();
+			}
+		};
+
+		//完善下html
+		var CommandButton = function(label,command,parent) {
+
+			Jel.Interface.ensureImplemented(command,CommandInterface);
+
+			this.element = document.createElement('button');
+			this.element.innerHTML = label;
+
+			parent.appendChild(this.element);
+
+			// add event
+			Jel.EventUtil.addHandler(this.element,'click',function() {
+				command.execute();
+			});
+		};
+
+		// 回退按钮
+		var UndoButton = function(label,parent,undoStack) {
+
+			this.element = document.createElement('button');
+			this.element.innerHTML = label;
+
+			parent.appendChild(this.element);
+
+			// add event
+			Jel.EventUtil.addHandler(this.element,'click',function() {
+				if(undoStack.length === 0) {
+					alert('已经回退至最后一步了！');
+					return;
+				}
+				var lastCommand = undoStack.pop();
+				lastCommand.undo();
+			});
+		};
+		
+
+		window.onload = function() {
+
+			var body = document.getElementsByTagName('body')[0];
+
+			var cursor = new Cursor(480,450,body);
+
+			// 客户：创建命令
+			var undoStack = [];
+			var upCommand = new UndoDecorator(new MoveUp(cursor),undoStack);
+			var downCommand = new UndoDecorator(new MoveDown(cursor),undoStack);
+			var leftCommand = new UndoDecorator(new MoveLeft(cursor),undoStack);
+			var rightCommand = new UndoDecorator(new MoveRight(cursor),undoStack);
+
+			var leftBtn = new CommandButton('left',leftCommand,body);
+			var upBtn = new CommandButton('up',upCommand,body);
+			var downBtn = new CommandButton('down',downCommand,body);
+			var rightBtn = new CommandButton('right',rightCommand,body);
+
+			var undoBtn = new UndoButton('undo',body,undoStack);
+		};
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

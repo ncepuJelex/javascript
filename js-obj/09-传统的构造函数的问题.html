@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		var name = "Jim";
+		var age = 23;
+		var gender = '男';
+		//使用json的缺点，不能复用
+		var p = {
+			 'name' : "Jim",
+			 'age' : 23,
+			 'gender' : '男',
+			 'sayHello' : function() {
+			 	alert('hello, you!');
+			 }
+		};
+
+		// p.sayHello();
+		// p['sayHello']();
+
+		// var p2 = p;
+		// alert(p2===p); //true
+
+		/*var Person = function() {
+			this.name = 'Jim';
+			this.age = 24;
+			this.gender = '男';
+			this.sayHello = function() {
+				alert('hello everybody');
+			};
+		};
+
+		var p = new Person();
+		p.sayHello();
+		// p['sayHello']();
+		var p3 = p;
+		alert(p3===p);
+		var p4 = new Person();
+		alert(p4==p);	//false*/
+
+
+		var Person = function(name,age,gender) {
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+			this.sayHello = function() {
+				alert('hello everybody');
+			};
+		};
+
+		var p = new Person('jack',26,'男');
+		p.sayHello();
+		alert(p.name);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

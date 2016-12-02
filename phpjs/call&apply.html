@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>call和apply</title>
+	<script type="text/javascript">
+		function sizeSet(size) {
+			this.style.fontSize=size+'px';
+		}
+
+		function setColor(color) {
+			this.style.color = color;
+		}
+
+		window.onload = function() {
+			document.getElementById('btn').onclick=function() {
+				var div = document.getElementById('div');
+				sizeSet.call(div,100);
+				setColor.apply(div,['skyblue']);
+			};
+		}
+	</script>
+</head>
+<body>
+	<div id="div">Hello JavaScript</div>
+	<input type="button" id="btn" value="hit"/>
+</body>
+</html>

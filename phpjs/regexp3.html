@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则3</title>
+	<script type="text/javascript">
+		
+		window.onload = function() {
+
+			document.getElementById('btn1').onclick = function() {
+				var content = document.getElementById('content').value;
+				var reg = /\d\d\d/gi;
+				var result = reg.test(content);
+				alert(result);
+			};
+			document.getElementById('btn2').onclick = function() {
+				var content = document.getElementById('content').value;
+				var reg = /\d\d\d/gi;
+				/*var result = reg.exec(content);//每次执行时只查一次,所以result只会是第一个匹配到的3位数字
+				alert(result);*/
+
+				var result;
+				while(result=reg.exec(content)) {
+					alert(result);
+				}
+			};
+			document.getElementById('btn3').onclick = function() {
+				var content = document.getElementById('content').value;
+				var reg = /\d\d\d/gi;
+				var result = content.search(reg);//string的方法，返回查找到的index
+				alert(result);
+				
+			};
+			document.getElementById('btn4').onclick = function() {
+				var content = document.getElementById('content').value;
+				var reg = /\d\d\d/gi;
+				var result = content.match(reg);//string的方法，以数组形式返回匹配到的数据
+
+				alert(result);
+			};
+			document.getElementById('btn5').onclick = function() {
+				var content = document.getElementById('content').value;
+				var reg = /\d\d\d/gi;
+				var result = content.replace(reg,'***');
+				alert(result);
+			};
+			document.getElementById('btn6').onclick = function() {
+				var content = document.getElementById('content').value;
+				var reg = /\d\d\d/gi;
+				var result = content.split(reg);
+				alert(result);
+			};
+			
+		}
+
+	</script>
+</head>
+<body align='center'>
+	<input type="text" id="content" size=50>
+	<br>
+	<br>
+	<input type='button' id="btn1" value="test" />
+		&nbsp;
+	<input type='button' id="btn2" value="exec" />
+	<br>
+	<input type='button' id="btn3" value="search" />
+	&nbsp;
+	<input type='button' id="btn4" value="match" />
+	&nbsp;
+	<input type='button' id="btn5" value="replace" />
+	&nbsp;
+	<input type='button' id="btn6" value="split" />
+	&nbsp;
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		// Array each
+		// ECMA foreach 遍历,只适合一维数组
+
+		var arr = [1,2,3,[4,[5]]];
+		arr.forEach(function(item,index,arr) {
+
+			/*
+			1
+			2
+			3
+			Array[2]0: 4
+			1: Array[1]0: 5
+			length: 1
+			__proto__: Array[0]
+			length: 2
+			__proto__: Array[0]
+			*/
+			console.log(item);
+
+			// alert(item);
+		});
+
+		Array.prototype.each = function(fn) {
+
+			try {
+				//遍历过程中的计数器，这种写法防止变量冲突
+				this.i || (this.i = 0);
+				//当该数组长度大于0，并且传入的参数是函数时
+				if(this.length > 0 && fn.constructor==Function) {
+					// 没有遍历到结尾
+					while(this.i<this.length) {
+						// 获取当前元素
+						var ele = this[this.i];
+						// 如果不为空之类的，并且它是数组类型，那就
+						// 递归吧，接着操作
+						if(ele && ele.constructor == Array) {
+							ele.each(fn);
+						}
+						else {
+							/*
+							调用fn，其实第一个参数是没用的，传null都行，重点是第2个参数了
+							*/
+							fn.call(ele,ele);
+						}
+						this.i++;//计数器递增
+					}
+					this.i = null;//释放资源
+				}
+
+			} catch(ex) {
+				//do sth
+			}
+			return this;
+		}
+
+		arr.each(function(item) {
+			console.log(item);
+		})
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

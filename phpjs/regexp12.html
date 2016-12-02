@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则练习</title>
+	<script type="text/javascript">
+		
+		/*var str = '15003127938';
+		var reg = /^15[0-7,9]\d{8}$/gi;//验证非以158开头的手机号
+		if(reg.test(str)) {
+			alert('legal');
+		} else {
+			alert('illegal');
+		}*/
+
+
+		// var email = 'fanguyinheng@foxmail.com';
+		// var email = 'fanguyinhengJelex@gmail.com';
+		// var email = 'huadianshiyan@163.com';
+		// var email = 'huadianshiyan@sina.com';
+		/*var email = '1355258014.8@163.com.cn.org';
+		var reg = /^[\w\.]+@(\w+\.)+[a-z]{2,4}$/gi;
+		if(reg.test(email)) {
+			alert('邮箱合法');
+		} else {
+			alert('邮箱不合法');
+		}*/
+		/*if(/\w+/gi.test('_')) {
+			alert('ok');//会弹出来的！
+		}*/
+
+
+		/*var ip = '114.254.123.28';//此时上网查询出本机的IP，本机IP: 114.254.123.28北京市北京市 联通
+
+		// var ip = '1.0.0.0';//妈的，这么好的IP肯定在美国
+
+		var reg = /^([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$/gi;
+		if(reg.test(ip)) {
+			alert('ip合法');
+		} else {
+			alert('ip不合法');
+		}*/
+
+
+		/*var str = '我我我...我我...是是...一一个个个个个...……帅帅帅帅帅帅帅帅帅哥';
+		var reg = /\.|……/gi;
+		str = str.replace(reg,'');
+		alert(str);
+
+		reg = /(.)\1+/gi;
+		str = str.replace(reg,'$1');
+		alert(str);*/
+
+
+		// 使用try...catch解决浏览器兼容性问题，还记得
+		// 崔希凡老师的javascript ajax视频教程吗？他不就是那么使用的吗！！！
+		try {
+			var i = 10;
+			display();//报错
+			alert('first');
+		} catch(e) {
+			// throw e;
+			alert(e.message);
+
+			// IE下有效：
+			/*结果：
+				name:缺少对象
+				message:缺少对象
+				number:缺少对象
+				description:缺少对象
+			*/
+			for(var j in e) {
+				document.write(j + ":" + e.message + "<br>");
+			}
+		}
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

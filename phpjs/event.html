@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<script type="text/javascript">
+		
+	function damt() {
+		alert('hello');
+		alert('world!');
+	}
+	function display(text) {
+		document.getElementById('content').innerHTML += text;
+	}
+
+	function keyup(obj) {
+		document.getElementById('keyup').innerHTML = 'you pressed the ' + obj.value;
+	}
+
+	</script>
+</head>
+<body onunload="alert('dont go!')">
+	<!-- <input type="button" value="点击我" onclick="alert('hello');alert('world');"> -->
+	<input type="button" value="点击我" onclick="damt();">
+	<input type="text" name="" onkeypress="display('press');" onkeyup="keyup(this);">
+
+
+	<div id="content"></div>
+	<div id="keyup"></div>
+</body>
+</html>

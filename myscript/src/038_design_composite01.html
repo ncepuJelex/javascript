@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组合模式</title>
+	<script type="text/javascript">
+		
+	/*
+		公司：
+			部门：
+				员工：
+	*/
+
+		var Org = function(name) {
+			this.name = name;
+			this.depts = [];
+		};
+		Org.prototype = {
+			constructor : Org,
+			addDept : function(child) {
+				this.depts.push(child);
+				return this;//可执行链式调用
+			},
+			getDepts : function() {
+				return this.depts;
+			}
+		}
+
+		var Dept = function(name) {
+			this.name = name;
+			this.person = [];
+		};
+		Dept.prototype = {
+			constructor : Dept,
+			addPerson : function(aPerson) {
+				this.person.push(aPerson);
+				return this;
+			},
+			getPerson : function() {
+				return this.person;
+			}
+		}
+
+
+		var Person = function(name) {
+			this.name = name;
+		};
+		Person.prototype = {
+			constructor : Person,
+			workHard: function() {
+				document.write(this.name + ', 挺住！好好工作！');
+			},
+			sleep : function() {
+				document.write(this.name + ', 你太累了！让你休息1小时！');
+			}
+		}
+
+		var p1 = new Person('xiaoA');
+		var p2 = new Person('sB');
+		var p3 = new Person('zhangSan');
+		var p4 = new Person('liSi');
+		var p5 = new Person('wangWu');
+		var p6 = new Person('zhaoLiu');
+
+		var dept1 = new Dept('IT');
+		var dept2 = new Dept('财务');
+
+		dept1.addPerson(p1).addPerson(p2).addPerson(p3);
+		dept2.addPerson(p4).addPerson(p5).addPerson(p6);
+
+		var org = new Org('天融');
+		org.addDept(dept1).addDept(dept2);
+
+		// 需求：让具体的一个人去努力工作！让sB去工作。
+
+		org.getDepts().reduce(function(prev, curr) {
+			curr.getPerson().reduce(function(res,cur) {
+				if(cur.name === 'sB') {
+					cur.workHard();
+				}
+			}, new Person());
+		},new Dept());
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

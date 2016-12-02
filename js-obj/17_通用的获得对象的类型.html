@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+	function getFnName(fn) {
+		/*if(typeof fn !== 'function') return;
+		return fn.name || /function (.+?)\(/.exec(fn+'')[1];*/
+		/*if(fn.name) {
+			return fn.name;
+		} else {
+			return /function (.+?)\(/.exec(fn+'')[1];
+		}*/
+		// return fn.name ? fn.name : /function (.+?)\(/.exec(fn+'')[1];
+
+		return typeof fn !== 'function' ? undefined:
+			fn.name || /function (.+?)\(/.exec(fn+'')[1];
+
+
+	}
+
+	function personXuJelex() {}
+
+	var xu = new personXuJelex();
+	var name = getFnName(xu.constructor);
+	// var name = getFnName(personXuJelex);
+	console.log(name);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+	function Fn() {
+
+	}
+
+	Fn.prototype.num = 123;
+
+	var f = new Fn();
+
+	f.num = 1;
+
+	alert(f.name);	//undefined
+	alert(f.num);	
+	//总结：在访问对象的某一个属性（方法）的时候，首先会在当前对象中
+	//查找有没有该属性
+	// 如果没有：就会在构造方法的定义规则中查找
+	// 如果没有：就会到与对象联系起来的构造函数的prototype中查找
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

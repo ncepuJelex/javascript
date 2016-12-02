@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>门面模式</title>
+	<script type="text/javascript">
+		
+		// 简化API接口，经典的就是事件
+
+		function a(x) {
+			// do sth
+		}
+
+		function b(y) {
+			// do sth
+		}
+
+		// 这就是facade!!!
+		function ab(x,y) {
+			a(x);
+			b(y);
+		}
+
+		// 需求：获得页面元素，给它设置css样式
+		function setStyle(elements, prop, value) {
+			for(var i=0; i<elements.length; i++) {
+				document.getElementById(elements[i]).style[prop] = value;
+			}
+		}
+
+		function setCss(elements,options) {
+			for(var prop in options) {
+				if(!options.hasOwnProperty(prop)) continue;
+				setStyle(elements,prop,options[prop]);
+			}
+		}
+
+
+		window.onload = function() {
+			// setStyle(["div1","div2","div3"],'color','skyblue');
+			setCss(["div1","div2","div3"],{
+				'background':'pink',
+				"fontSize" : '13px',
+				'color' : 'skyblue',
+				'left' : '400px'
+				}
+			);
+		}
+
+	</script>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3</div>
+</body>
+</html>

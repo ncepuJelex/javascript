@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则定位符2</title>
+	<script type="text/javascript">
+		
+		/*var str = 'hello,my name is xiaoC!！&……%#$%_-';
+		var reg = /^hell\w/gi;//以h开头
+		alert(str.match(reg));
+		alert(RegExp.lastIndex);//只在IE下有用，结果为5*/
+
+		/*var str = 'hello,my name is xiaoC!';
+		var reg = /aoC!$/gi;//以结尾
+		alert(str.match(reg));*/
+
+		var str = 'hello,my name is xiaoC!';
+		var reg = /\w\Bam\w/gi;//\B非单词边界,匹配前面不是单词边界的字符,结果name
+		alert(str.match(reg));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		/*function Person() {
+
+		}
+
+		Person.prototype = {
+			name : 'zs',
+			age : 40,
+			job : '程序员',
+			friends : ['ls','ww']
+		}
+
+		var p1 = new Person();
+		p1.friends.push('zl');
+
+		console.log(p1);
+
+		var p2 = new Person();
+		console.log(p2);//也有zl,因为prototype共享了*/
+
+
+		/*function Person(name,age,job,friends) {
+			this.name = name;
+			this.age = age;
+			this.job = job;
+			this.friends = friends;
+		}
+
+		Person.prototype = {
+			constructor : Person,
+			sayName : function() {
+				console.log(this);
+			}
+		}
+
+		var p1 = new Person('zs',32,'PA',['隔壁老王','王二麻子']);
+		console.log(p1);
+
+		var p2 = new Person('李四',46,'boss',['小五','老四']);
+		console.log(p2);*/
+
+
+		function Person(name ,age, job, friends) {
+			this.name = name;
+			this.age = age;
+			this.job = job;
+			this.friends = friends;
+			if(typeof this.sayName != 'function') {
+				Person.prototype.sayName = function() {
+					console.log(this);
+				}
+			}
+		}
+
+		function Person(name ,age, job, friends) {
+			var obj = {};
+			var name = name;
+			var age = age;
+			var friends = friends;
+			obj.sayName = function() {
+				console.log(name);
+			}
+			return obj;
+		}
+
+		var p1 = new Person('张三');
+		p1.sayName();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

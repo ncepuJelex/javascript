@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+
+	<link rel="stylesheet" href="css/style.min.css" />
+	<script type="text/javascript" src="js/jstree.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$('#container').jstree({
+			    'core' : {
+			      'data' : function(node,cb) {
+			      	if(node.id === "#") {
+			      		cb([{"text" : "Root", "id" : "1","children":true}]);
+			      	} else {
+			      		cb(["Child"]);
+			      	}
+			      }
+			    }
+			  });
+			});
+	</script>
+</head>
+
+<body>
+	<div id="container"></div>
+	
+</body>
+</html>

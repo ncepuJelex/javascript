@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  Plugins
+
+jsTree comes with a few plugin bundled, but they will only modify your tree if you activate them using the "plugins" config option. Here is a brief description of each plugin. You can read more on the available config options for each plugin in the API docs.
+
+checkbox
+
+Renders a checkbox icon in front of each node, making multiselection easy. It also has a "tri-state" option, meaning a node with some of its children checked will get a "square" icon.
+
+Keep in mind that if any sort of cascade is enabled, disabled nodes may be checked too (not by themselves, but for example when a parent of a disabled node is checked and selection is configured to cascade down).
+
+$("#tree").jstree({
+  "plugins" : ["checkbox"]
+});
+view result
+
+contextmenu
+
+Makes it possible to right click nodes and shows a list of configurable actions in a menu.
+
+$("#tree").jstree({
+  "core" : { "check_callback" : true }, // so that modifying operations work
+  "plugins" : ["contextmenu"]
+});
+view result
+
+dnd
+
+Makes it possible to drag and drop tree nodes and rearrange the tree.
+
+$("#tree").jstree({
+  "core" : { "check_callback" : true }, // so that operations work
+  "plugins" : ["dnd"]
+});
+view result
+
+massload
+
+Makes it possible to load multiple nodes in a single go (for a lazy loaded tree).
+
+$("#tree").jstree({
+  "core" : {
+    "data" : { .. AJAX config .. }
+  },
+  "massload" : {
+    "url" : "/some/path",
+    "data" : function (nodes) {
+      return { "ids" : nodes.join(",") };
+    }
+  },
+  "plugins" : [ "massload", "state" ]
+});
+search
+
+Adds the possibility to search for items in the tree and show only matching nodes. It also has AJAX / callback hooks, so that search will work on lazy loaded trees too.
+
+<form id="s">
+  <input type="search" id="q" />
+  <button type="submit">Search</button>
+</form>
+<script>
+$("#container").jstree({
+  "plugins" : ["search"]
+});
+$("#s").submit(function(e) {
+  e.preventDefault();
+  $("#container").jstree(true).search($("#q").val());
+});
+</script>
+view result
+
+sort
+
+Automatically arranges all sibling nodes according to a comparison config option function, which defaults to alphabetical order.
+
+$("#tree").jstree({
+  "plugins" : ["sort"]
+});
+view result
+
+state
+
+Saves all opened and selected nodes in the user's browser, so when returning to the same tree the previous state will be restored.
+
+$("#tree").jstree({
+  // the key is important if you have multiple trees in the same domain
+  "state" : { "key" : "state_demo" },
+  "plugins" : ["state"]
+});
+view result
+
+types
+
+Makes it possible to add a "type" for a node, which means to easily control nesting rules and icon for groups of nodes instead of individually. To set a node type add a type property to the node structure.
+
+$("#tree").jstree({
+  "types" : {
+    "default" : {
+      "icon" : "glyphicon glyphicon-flash"
+    },
+    "demo" : {
+      "icon" : "glyphicon glyphicon-ok"
+    }
+  },
+  "plugins" : ["types"]
+});
+view result
+
+unique
+
+Enforces that no nodes with the same name can coexist as siblings - prevents renaming and moving nodes to a parent, which already contains a node with the same name.
+
+$("#tree").jstree({
+  "plugins" : ["unique"]
+});
+view result
+
+wholerow
+
+Makes each node appear block level which makes selection easier. May cause slow down for large trees in old browsers.
+
+$("#tree").jstree({
+  "plugins" : ["wholerow"]
+});
+view result
+
+More plugins
+
+If you create your own plugin (or download a 3rd party one) you must include its source on the page and list its name in the "plugins" config array.
+
+// conditional select
+(function ($, undefined) {
+  "use strict";
+  $.jstree.defaults.conditionalselect = function () { return true; };
+  $.jstree.plugins.conditionalselect = function (options, parent) {
+    this.activate_node = function (obj, e) {
+      if(this.settings.conditionalselect.call(this, this.get_node(obj))) {
+        parent.activate_node.call(this, obj, e);
+      }
+    };
+  };
+})(jQuery);
+$("#tree").jstree({
+  "conditionalselect" : function (node) {
+    return node.text === "Root node" ? false : true;
+  },
+  "plugins" : ["conditionalselect"]
+});
+view result
+
+As seen here when creating a plugin you can define a default config, add your own functions to jstree, or override existing ones while maintaining the ability to call the overridden function.
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>id元素</title>
+
+	<style>
+		div,p {
+			width: 100px;
+			height: 30px;
+			border: 1px solid red;
+			margin: 10px, 0;
+		}
+	</style>
+	
+	<script type="text/javascript">
+
+		var get = function(selector,results) {
+			results = results || [];
+
+			var rquickExpr = /^(?:#([\w-]+)|\.([\w-]+)|([\w]+)|(\*))$/gi,
+				m = rquickExpr.exec(selector); //?:结果不被捕获
+			// 如果匹配到
+			if(m) {
+				console.log(m);
+				
+				/*if(m[1]) {//id
+					results = getId(m[1],results);
+				} else if(m[2]) {//class name
+					results = getClass(m[2],results);
+				} else if(m[3]) {//tag name
+					results = getTag(m[3],results);
+				} else if(m[4]) {//any other
+					results = getTag(m[4],results);
+				}*/
+				if(m[1]) {
+					results = getId(m[1],results);
+				} else if(m[2]) {
+					results = getClass(m[2],results);
+				} else {
+					results = getTag(m[3] || "*",results);
+				} 
+			}
+			return results;
+		}		
+
+		var getTag = function(tag,results) {
+			results = results || [];
+			// 看下一行的巧妙！！！
+			results.push.apply(results,document.getElementsByTagName(tag));
+			return results;
+		}
+
+		var getId = function(id,results) {
+			results = results || [];
+			results.push(document.getElementById(id));
+			return results;
+		};
+
+		var getClass = function(className,results) {
+			results = results || [];
+			results.push.apply(results,document.getElementsByClassName(className));
+			return results;
+		}
+
+		var each = function(arr,fn) {
+			for(var i=0; i<arr.length; i++) {
+				if(fn.call(arr[i],i,arr[i]) === false) {
+					break;
+				}
+			}
+		};
+
+		window.onload = function() {
+
+			each(get("#dv"),function() {
+				this.style.backgroundColor = 'skyblue';
+			});
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<div id='dv'></div>
+	<div class="xx"></div>
+	<p></p>
+	<p class="xx"></p>
+</body>
+</html>

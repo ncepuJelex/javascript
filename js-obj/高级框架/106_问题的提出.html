@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>106问题的提出</title>
+	<script type="text/javascript" src="common.js"></script>
+	<style type="text/css">
+		
+		.rect {
+			width: 400px;
+			height: 50px;
+			margin: 10px 0;		}
+		div.c1 {
+			border: 1px solid red;
+		}
+		div.c {
+			border: 1px solid skyblue;
+		}
+		div.c2 {
+			border: 1px solid green;
+		}
+
+	</style>
+	
+	<script type="text/javascript" src="common2.js"></script>
+
+	<script type="text/javascript">
+
+
+		window.onload = function() {
+
+			get('.cx')[0].style.border = '1px solid grey';
+			get('#c',get('.cx')[0])[0].style.backgroundColor = 'grey';
+		};
+
+
+	</script>
+</head>
+<body>
+	
+	<div class="cx">
+		<div class="c1 rect">div1</div>
+		<div class="c2 rect">div2</div>
+		<div id="c" class="c rect">div3</div>
+		<div class="c3 rect">div4</div>
+	</div>
+	<div>
+		<div class="c1 rect">div1</div>
+		<div class="c2 rect">div2</div>
+		<div class="c rect">div3</div>
+		<div class="c1 rect">div4</div>
+	</div>
+</body>
+</html>
